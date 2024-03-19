@@ -7,11 +7,10 @@
     margin: 0;
   }
   
-
   .nav-icon {
-    margin: 1rem;
     transition: transform 0.5s ease;
   }
+  
   
   .nav-icon:hover {
     transform: scale(1.2);
@@ -19,8 +18,9 @@
   
   .nav-icon-selected {
     transform: scale(1.2);
-    box-shadow: -1px 1px 16px 8px rgba(26, 112, 185, 0.85);
+    box-shadow:  -1px 1px 16px 8px rgba(26, 112, 185, 0.85);
   }
+  
   
   #navigation-icons {
     padding-top: 1rem;
@@ -31,6 +31,12 @@
   }
   
   .nav-icon-wrapper > img {
-    width: 2.938rem;
-    height: 2.25rem;
-  }
+    margin: 0;
+display: block;}
+
+    .nav-icon-wrapper{
+        margin-left: 0.5rem; 
+        margin-right: 0.5rem; 
+        margin-top: 0;
+        margin-bottom: 0;
+    }

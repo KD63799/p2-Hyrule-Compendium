@@ -7,9 +7,20 @@ function Categories() {
   const [pageView, setPageView] = useState(null);
 
   const handleNavigationClick = function (event) {
-    const clickedIcon = event.target;
-    setCurrentNavIcon(clickedIcon);
+    const clickedIcon = event.target.closest('.nav-icon-wrapper');
+    if (!clickedIcon) return; // Si l'icône n'est pas trouvée, ne rien faire
+  
+    setCurrentNavIcon(clickedIcon.querySelector('img'));
     setPageView(clickedIcon.id);
+  
+    // Retirez la classe 'nav-icon-selected' de tous les éléments avant d'appliquer la classe à l'élément cliqué
+    const navIconWrappers = document.querySelectorAll('.nav-icon-wrapper');
+    navIconWrappers.forEach((wrapper) => {
+      wrapper.classList.remove('nav-icon-selected');
+    });
+  
+    // Appliquez la classe 'nav-icon-selected' à l'élément cliqué
+    clickedIcon.classList.add('nav-icon-selected');
   };
 
   return (

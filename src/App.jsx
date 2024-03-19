@@ -1,6 +1,8 @@
 
 import './App.css'
 import Categories from './composants/CategorieBar/Categories'
+import Carousel from './composants/Carousel/Carousel';
+
 
 function App() {
 
@@ -8,6 +10,7 @@ function App() {
   return (
     <>
     <Categories />
+    <Carousel />
     </>
   )
 }
