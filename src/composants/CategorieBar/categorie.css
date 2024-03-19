@@ -1,0 +1,36 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+
+  .nav-icon {
+    margin: 1rem;
+    transition: transform 0.5s ease;
+  }
+  
+  .nav-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .nav-icon-selected {
+    transform: scale(1.2);
+    box-shadow: -1px 1px 16px 8px rgba(26, 112, 185, 0.85);
+  }
+  
+  #navigation-icons {
+    padding-top: 1rem;
+    height: 5.125rem;
+    position: fixed;
+    width: 100%;
+    top: 3.9rem;
+  }
+  
+  .nav-icon-wrapper > img {
+    width: 2.938rem;
+    height: 2.25rem;
+  }
