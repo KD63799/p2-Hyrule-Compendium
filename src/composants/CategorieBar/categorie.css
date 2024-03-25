@@ -1,11 +1,4 @@
 
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-  }
   
   .nav-icon {
     transition: transform 0.5s ease;
