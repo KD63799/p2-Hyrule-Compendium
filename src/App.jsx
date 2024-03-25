@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import AllArmeApi from "./composants/display Arme-jsx/Arme";
+import Formulaire from "./composants/display Formulaire.jsx/Formulaire";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App (){
   return (
-    <>
-    </>
+ <>
+ <AllArmeApi/>
+ <Formulaire />
+
+ </>
   )
+
 }
 
 export default App

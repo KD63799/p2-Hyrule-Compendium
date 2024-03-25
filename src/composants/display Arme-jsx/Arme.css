@@ -1,0 +1,7 @@
+.Image{
+  display: flex;
+}
+li{
+  color: aqua;
+  list-style: none;
+}
