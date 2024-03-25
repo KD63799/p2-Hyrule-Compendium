@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './Sort.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowUp,  faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faArrowUp,  faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 
 
-const SortOverlay = () => {
+const SortOverlay = ({manageSort, setManageSort}) => {
   const [sortChoice, setSortChoice] = useState('Name');
   const [sortDirection, setSortDirection] = useState(false);
 
@@ -18,12 +18,13 @@ const SortOverlay = () => {
   };
 
   const handleSortClose = () => {
-    document.getElementById('sort-view').classList.add('hidden');
+    setManageSort(!manageSort)
   };
+
 
   return (
     <div id="sort-view" className="sort-overlay">
-      <div className="row end" id="sort-row">
+      <div className={`row end ${manageSort ? "" : "hidden"}`} id="sort-row">
         <div id="sort-container" className="col-sort background-texture">
           <div id="sort-header" className="row space-between">
             <div className="col-fluid">
@@ -32,7 +33,7 @@ const SortOverlay = () => {
               </div>
             </div>
             <div className="col-fluid">
-              <FontAwesomeIcon id="sort-close" className="text-grey sort-close" icon={faXmark} onClick={handleSortClose} />
+              <FontAwesomeIcon id="sort-close" className="text-grey sort-close" icon={faTimes} onClick={handleSortClose} />
             </div>
           </div>
           <div className="row">

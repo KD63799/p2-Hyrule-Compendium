@@ -2,13 +2,13 @@ import React from "react";
 import "./AppHeader.css";
 import { useState } from "react";
 
-const AppHeader = ({manageFavorite, setManageFavorite}) => {
+const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort}) => {
   return (
     <header className="nav-header background-dark background-texture">
       <div className="row space-between">
         <div className="col-fluid">
           <h2 id="app-header" className="text-gold hylia-font">
-            KOKIRI
+            HYRULE COMPENDIUM
           </h2>
         </div>
         <div className="col-fluid">
@@ -16,8 +16,8 @@ const AppHeader = ({manageFavorite, setManageFavorite}) => {
             <div className="header-icon-wrapper center in-line">
               <img
                 id="nav-trend"
-                src="src\assets\images\icons\stone_of_Fire_Model.png"
-                alt="Stone of Fire"
+                src="src\assets\images\icons\letter.png"
+                alt="Zelda Style Letter"
               />
             </div>
             <div className="header-icon-wrapper center in-line">
@@ -34,7 +34,7 @@ const AppHeader = ({manageFavorite, setManageFavorite}) => {
                 alt="Heart"
               />
             </div>
-            <div className="header-icon-wrapper center in-line">
+            <div onClick={() => setManageSort(!manageSort)} className="header-icon-wrapper center in-line">
               <img
                 id="nav-sort"
                 src="src\assets\images\icons\Trier.png"
