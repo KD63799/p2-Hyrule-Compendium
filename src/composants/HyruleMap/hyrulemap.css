@@ -30,9 +30,14 @@ section{
 #map, #panorama {
     margin-top: 2vh;
     margin-bottom: 2vh;
-    min-height: 85vh;
+    max-height: 85vh;
     min-width: 70vw;
     border-radius: 10px;
+    width: 100%;
+       max-width: 1920px;   
+     min-height: 50vh;
+     margin-right: auto;
+     margin-left: auto;
 }
 
 .hide {
