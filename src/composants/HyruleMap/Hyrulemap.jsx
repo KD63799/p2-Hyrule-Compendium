@@ -41,7 +41,7 @@ const HyruleMap = ({ loadingImagePath }) => {
       });
 
       const bounds = [[0, 0], [1000, 2000]];
-      const image = L.imageOverlay('src\assets\images\hyruleMap.jpeg', bounds).addTo(map);
+      const image = L.imageOverlay('src/assets/images/hyruleMap.jpeg', bounds).addTo(map);
       map.fitBounds(bounds);
 
       for (const spot of spotsData) {
