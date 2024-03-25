@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Favorites({data}) {
+function Favorites({ data }) {
   // Déclaration d'un état local "favorites" avec useState, initialisé à un tableau vide
   const [favorites, setFavorites] = useState([]);
 
@@ -17,7 +17,7 @@ function Favorites({data}) {
   // Définition d'une fonction handleFavorite pour gérer l'ajout/suppression d'un favori
   function handleFavorite(id) {
     // Création d'un nouveau tableau de favoris en fonction de l'ID cliqué
-    const newFavorites = favorites.map(item => {
+    const newFavorites = favorites.map((item) => {
       return item.id === id ? { ...item, favorite: !item.favorite } : item;
     });
 
@@ -50,8 +50,23 @@ function Favorites({data}) {
       <h1>Favorite list</h1>
       <ul>
         {/* Affichage de la liste des favoris */}
-        {favorites.map(item =>
-          item.favorite === true ? <li key={item.id}>{item.name}</li> : null
+        {favorites.map((item) =>
+          item.favorite === true ? (
+            <li key={item.id}>
+              {item.name}
+              {
+                <button
+                  // Gestion du clic sur le bouton pour ajouter/supprimer un favori
+                  onClick={() => {
+                    handleFavorite(item.id);
+                  }}
+                >
+                  {/* Changement de texte du bouton en fonction de l'état du favori */}
+                  {item.favorite === true ? "Remove" : "Add"}
+                </button>
+              }
+            </li>
+          ) : null
         )}
       </ul>
     </div>
