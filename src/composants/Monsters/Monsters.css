@@ -1,0 +1,67 @@
+
+:root{
+    --theme1 : #E0D1AD;
+    --theme2 : #7494be;
+    --fond : #302726;
+    --fond-black : #1a1414;
+}
+li{
+    list-style: none;
+}
+body{
+    font-family: 'Hylia Serif Beta', serif;
+    color : var(--theme1);
+    background-color: var(--fond);
+}
+.color-stats{
+    color : var(--theme2);
+}
+
+.col-img-wrapper {
+    display: flex;
+    margin: 1rem;
+    gap: 20px;
+    align-items: center;
+    background-color: var(--fond-black) ;
+    flex-basis: 400px;
+    
+}
+Copier
+div #card {
+    transition: transform 2s;
+    border: 1px solid transparent;
+}
+
+div #card:hover {
+    animation: borderAnimation 1s forwards;
+}
+
+@keyframes borderAnimation {
+    0% {
+        border: 1px solid transparent;
+    }
+    70% {
+        transform: translateY(0); /* La transformation que vous souhaitez */
+    }
+    100% {
+        border: 1px solid var(--theme1);
+    }
+}
+.col-img-wrapper > img {
+    width: 4.375rem;
+    height: 4.375rem;
+    border-radius: 10%;
+}
+
+.col-img {
+    flex-basis: calc(16.6667%);
+}
+
+.d-flex-w{
+    display: flex;
+    flex-flow:row wrap;
+}
+
+.j-c{
+    justify-content: center;
+}

@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+
+import AppRouter from './composants/AppRouter.jsx';
 
 function App() {
-
   return (
-    <>
-    </>
-  )
+      <AppRouter />
+
+  );
 }
 
-export default App
+
+export default App;
