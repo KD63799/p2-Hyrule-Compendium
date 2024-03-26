@@ -72,7 +72,7 @@ button:focus-visible {
   align-items: center;
   height: 100vh; /* Utilise toute la hauteur de la fenêtre */
   text-align: center;
-  margin-left: 150%;
+ margin-left: 40%;
 }
 
 .form-container {
@@ -88,6 +88,8 @@ form{
   flex-direction: column;
   gap: 12px;
   text-align: center;
+  width: 50%;
+  margin-left: 90px;
 }
 /* AllArmeApi.css */
 /* AllArmeApi.css */
@@ -140,12 +142,6 @@ form{
 }
 .input{
 border-radius: 50px;
-}
-form{
-  display: flex;
-  justify-content: center;
-  border-radius: 50px;
-
 }
 
 .container {
