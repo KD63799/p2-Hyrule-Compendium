@@ -36,10 +36,19 @@ const AppRouter = () => {
             }
           />
           <Route path="/Monsters" element={<Monsters />} />
+          {/* <Route path="/Monsters/:id" element={MonstersDetail />} /> */}
           <Route path="/Creatures" element={<Creatures />} />
-          {/* <Route path="/Creatures/:id" element={<CreaturesItem />} /> */}
+          {/* <Route path="/Creatures/:id" element={<CreaturesDetail />} /> */}
           <Route path="/Treasure" element={<Treasure />} />
           {/* <Route path="/Treasure/:id" element={<TreasureItem />} /> */}
+          <Route path="/Equipment" element={<Arme/>}/>
+          {/* <Route path="/Treasure/:id" element={<TreasureItem />} /> */}
+          <Route path="/Ocarina" element={<Ocarina/>}/>
+          <Route path="/MapHyrule" element={<Hyrulemap/>}/>
+          {/* <Route path="/ComingSoon" element={<MajoraMoon/>}/> */}
+          {/* <Route path="/error" element={<Error />} /> */}
+
+          
         </Routes>
       </Router>
     </div>
