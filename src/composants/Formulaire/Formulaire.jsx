@@ -40,14 +40,13 @@ function Formulaire() {
           onSubmit={(values, { setSubmitting, resetForm }) => { // Fonction exécutée lors de la soumission du formulaire
             setTimeout(() => { // Utilisation de setTimeout pour simuler un délai
               validationSchema.validate(values).then(() => { // Validation des valeurs avec Yup
+               alert("formulaire reussi")// affichage du d'alerte apres la soumission du formulaire
                 if (!isMusicPlayed) { // Si la musique n'a pas déjà été jouée
                   playAudio(); // Joue la musique
                 }
                 setSubmitting(false); // Définit isSubmitting à false après la soumission
                 resetForm(); // Réinitialise le formulaire
                 setIsMusicPlayed(false); // Réinitialise isMusicPlayed à false
-                 // Affichage d'un message fixe pour indiquer que le formulaire a été soumis avec succès
-                  alert("Formulaire envoyé avec succès");
               }).catch((errors) => { // S'il y a des erreurs de validation
                 console.error("Validation errors:", errors); // Affiche les erreurs de validation dans la console
                 setSubmitting(false); // Définit isSubmitting à false après la soumission
