@@ -1,5 +1,5 @@
 import Creatures  from "./Creatures/Creatures.jsx";
-import CreaturesItem from "./Creatures/Creatures__item/CreaturesItem.jsx";
+import CreaturesItem from "./Creatures__item/CreaturesItem.jsx";
 import Monsters  from "./Monsters/Monsters.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
