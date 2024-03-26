@@ -24,9 +24,16 @@ body{
     align-items: center;
     background-color: var(--fond-black) ;
     flex-basis: 400px;
-    
+    max-height: 13vh;
 }
-Copier
+
+.col-img-wrapper > button{
+    background-color: transparent !important;
+}
+
+img {
+    max-height: 11vh;
+}
 div #card {
     transition: transform 2s;
     border: 1px solid transparent;
