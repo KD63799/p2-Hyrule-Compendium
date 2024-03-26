@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function Favorites({ data }) {
   // Déclaration d'un état local "favorites" avec useState, initialisé à un tableau vide
