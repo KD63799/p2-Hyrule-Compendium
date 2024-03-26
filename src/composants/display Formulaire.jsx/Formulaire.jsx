@@ -1,53 +1,83 @@
-import { Formik, Form, Field, ErrorMessage } from "formik"; // Importation des composants nécessaires de Formik
-import * as Yup from "yup"; // Importation de Yup pour la validation du schéma
-import  './Formulaire.css'
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import "./Formulaire.css";
 
-
-function Formulaire() { // Définition du composant Formulaire
-  const validationSchema = Yup.object().shape({ // Définition du schéma de validation avec Yup
-    Nom: Yup.string().required("Veuillez saisir votre nom"), // Validation du champ "Nom" : obligatoire
-    Prenom: Yup.string().required("Veuillez saisir votre prénom"), // Validation du champ "Prenom" : obligatoire
-    email: Yup.string().email("L'adresse mail est incorrecte").required("Veuillez saisir votre adresse mail"), // Validation du champ "email" : obligatoire et doit être un email valide
-    password: Yup.string() // Validation du champ "password"
-      .required("Veuillez saisir votre mot de passe") // obligatoire
-      .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une lettre majuscule") // doit contenir au moins une lettre majuscule
-      .notOneOf([Yup.ref('Nom'), Yup.ref('Prenom')], "Le mot de passe ne peut pas contenir votre nom ou votre prénom") // ne doit pas contenir le nom ou le prénom
-      .test("minLength", "Le mot de passe doit contenir au moins 8 caractères", (value) => value && value.length >= 8) // doit contenir au moins 8 caractères
+function Formulaire() {
+  const validationSchema = Yup.object().shape({
+    Nom: Yup.string().required("Veuillez saisir votre nom"),
+    Prenom: Yup.string().required("Veuillez saisir votre prénom"),
+    email: Yup.string()
+      .email("L'adresse mail est incorrecte")
+      .required("Veuillez saisir votre adresse mail"),
+    password: Yup.string()
+      .required("Veuillez saisir votre mot de passe")
+      .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une lettre majuscule")
+      .notOneOf([Yup.ref("Nom"), Yup.ref("Prenom")], "Le mot de passe ne peut pas contenir votre nom ou votre prénom")
+      .test("minLength", "Le mot de passe doit contenir au moins 8 caractères", (value) => value && value.length >= 8),
   });
 
+  const playAudio = () => {
+    const audio = new Audio("src/assets/video/High Value Item Get (The Legend of Zelda Breath of the Wild OST).mp3");
+    audio.play();
+  };
+
   return (
-    <div className="container"> 
-      <div className="form-container"> 
-        <h1>Formulaire</h1> 
-        <Formik // Utilisation du composant Formik pour gérer le formulaire
-          initialValues={{ Nom: "", Prenom: "", email: "", password: "" }} // Valeurs initiales du formulaire
-          onSubmit={(values, { setSubmitting }) => { // Fonction appelée lors de la soumission du formulaire
+    <div className="container">
+      <div className="form-container">
+        <h1>Formulaire</h1>
+        <Formik
+          initialValues={{ Nom: "", Prenom: "", email: "", password: "" }}
+          onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2)); // Affichage des valeurs soumises dans une alerte
-              setSubmitting(false); // Fin de la soumission
-            }, 100);
+              alert(JSON.stringify(values, null, 2));
+              if (!isMusicPlayed && Object.keys(errors).length === 0) { // Vérifier si la musique n'a pas déjà été jouée et s'il n'y a pas d'erreurs de validation
+                playAudio();
+              }
+              setSubmitting(false);
+            }, 50);
           }}
-          validationSchema={validationSchema} // Utilisation du schéma de validation défini précédemment
+          validationSchema={validationSchema}
         >
-          {({ isSubmitting, errors, touched }) => ( // Fonction de rendu avec les paramètres fournis par Formik
-            <Form> 
-              <Field className={`input ${errors.Nom && touched.Nom && "error-touched"}`} type="text" name="Nom" placeholder="Saisissez votre nom" /> 
-              <ErrorMessage name="Nom" component="div" className="error-message" /> 
-              <Field className={`input ${errors.Prenom && touched.Prenom && "error-touched"}`} type="text" name="Prenom" placeholder="Saisissez votre prénom" /> 
-              <ErrorMessage name="Prenom" component="div" className="error-message" /> 
-              <Field className={`input ${errors.email && touched.email && "error-touched"}`} type="email" name="email" placeholder="Saisissez votre adresse mail" /> 
-              <ErrorMessage name="email" component="div" className="error-message" /> 
-              <Field className={`input ${errors.password && touched.password && "error-touched"}`} type="password" name="password" placeholder="Saisissez votre mot de passe" /> 
+          {({ isSubmitting, errors, touched }) => (
+            <Form>
+              <Field
+                className={`input ${errors.Nom && touched.Nom && "error-touched"}`}
+                type="text"
+                name="Nom"
+                placeholder="Saisissez votre nom"
+              />
+              <ErrorMessage name="Nom" component="div" className="error-message" />
+              <Field
+                className={`input ${errors.Prenom && touched.Prenom && "error-touched"}`}
+                type="text"
+                name="Prenom"
+                placeholder="Saisissez votre prénom"
+              />
+              <ErrorMessage name="Prenom" component="div" className="error-message" />
+              <Field
+                className={`input ${errors.email && touched.email && "error-touched"}`}
+                type="email"
+                name="email"
+                placeholder="Saisissez votre adresse mail"
+              />
+              <ErrorMessage name="email" component="div" className="error-message" />
+              <Field
+                className={`input ${errors.password && touched.password && "error-touched"}`}
+                type="password"
+                name="password"
+                placeholder="Saisissez votre mot de passe"
+              />
               <ErrorMessage name="password" component="div" className="error-message" />
-              <button type="submit" disabled={isSubmitting}> 
+              <button type="submit" disabled={isSubmitting}>
                 Envoyer
               </button>
-            </Form> // Fin du formulaire
+            </Form>
           )}
-        </Formik> 
-      </div> 
-    </div> // Fin du conteneur principal
+        </Formik>
+      </div>
+    </div>
   );
 }
 
-export default Formulaire; // Exportation du composant Formulaire
+export default Formulaire;

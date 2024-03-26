@@ -25,6 +25,7 @@ function AllArmeApi() {
         <div key={index}>
           <h3>{arme.name}</h3>
           <img src={arme.image} alt={arme.name} className="Image" />
+          <p className="numeroArme">{arme.id}</p>
         </div>
       ))}
     </>

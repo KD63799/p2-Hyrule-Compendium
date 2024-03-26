@@ -1,7 +1,19 @@
 .Image{
   display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  border:1px solid white;
 }
-li{
-  color: aqua;
-  list-style: none;
+
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+h3{
+  text-align: center;
+}
+p{
+  text-align: center;
 }

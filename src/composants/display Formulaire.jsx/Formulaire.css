@@ -122,9 +122,9 @@ form{
   margin-bottom: 20px; /* Ajoute un espace en bas du conteneur */
 }
 
-.monster-container article {
+/* .monster-container article {
   margin-bottom: 20px; /* Ajoute un espace en bas de chaque article */
-}
+} */
 
 .monster-container h3 {
   font-size: 1.5rem;
@@ -138,3 +138,45 @@ form{
 .input.error-touched {
   border: 1px solid red; /* Bordure rouge pour les champs "touchés" */
 }
+.input{
+border-radius: 50px;
+}
+form{
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Pour occuper toute la hauteur de la fenêtre */
+}
+
+.form-container {
+  width: 400px; /* Largeur du formulaire */
+  padding: 20px; /* Espacement interne */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 8px; /* Coins arrondis */
+  margin-left: -100px;
+  
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+}
+
+.error-touched {
+  border-color: red;
+}
+
