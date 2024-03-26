@@ -9,6 +9,15 @@ import Ocarina from './composants/Ocarina/Ocarina';
 import Partition from './composants/Partition/Partition';
 import Hyrulemap from './composants/HyruleMap/Hyrulemap';
 import AppRouter from './composants/AppRouter.jsx';
+import { createBrowserRouter } from 'react-router-dom';
+
+const router = createBrowserRouter([
+
+  {
+    path: '/map',
+    element: <Hyrulemap/>
+  }
+])
 
 
 function App() {
@@ -30,7 +39,6 @@ function App() {
     <Categories />
     <Ocarina />
     <Partition />
-    <Hyrulemap />
     <AppRouter />
     </main>
     </>
