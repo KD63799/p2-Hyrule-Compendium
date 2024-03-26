@@ -72,7 +72,7 @@ function Monsters() {
             {Filter.length > 0 ? (
               Filter.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
-                  <div className='col-img-wrapper'>
+                  <div className='col-img-wrapper img-wrap'>
                     <img src={Element.image} alt={Element.name} />
                     <div>
                       <li>{Element.name}</li>
@@ -84,8 +84,8 @@ function Monsters() {
             ) : (
               AllMunster.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
-                  <div className='col-img-wrapper'>
-                    <img src={Element.image} alt={Element.name} />
+                  <div className='col-img-wrapper img-wrap'>
+                    <img  src={Element.image} alt={Element.name} />
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>

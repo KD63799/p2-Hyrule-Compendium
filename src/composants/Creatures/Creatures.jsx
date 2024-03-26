@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import CreaturesItem from './Creatures__item/CreaturesItem';
+import CreaturesItem from '../Creatures__item/CreaturesItem';
 import { NavLink, Navigate } from 'react-router-dom';
 
 function Creatures() {
@@ -73,20 +73,24 @@ function Creatures() {
     return (
         <div>
 
-          <p>ggg{Compteur.description}</p>
-
             {/* Boutons pour déclencher les différents types de tri */}
             <button onClick={sortByDecroissant}>Trier par ordre décroissant</button>
             <button onClick={sortByCroissant}>Trier par ordre croissant</button>
             <button onClick={sortByNum}>Trier par numéro croissant</button>
             <button onClick={sortByNumInverse}>Trier par numéro Décroissant</button>
             {/* Affichage des monstres en fonction du filtre appliqué */}
-            <div className='d-flex-w j-c'>
+            <div  className='d-flex-w j-c'>
             {Filter.length > 0 ? (
               Filter.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper'>
-                    <img src={Element.image} alt={Element.name} />
+
+                  <NavLink className='Btn-img' to={`/CreaturesItem/${Element.id}`}>
+                    <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
+             
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
@@ -99,11 +103,11 @@ function Creatures() {
                 <>
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper'>
-                  <NavLink to={`/CreaturesItem/${Element.id}`}>
-    <a onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
-        <img src={Element.image} alt={Element.name} />
-    </a>
-</NavLink>
+                  <NavLink className='Btn-img' to={`/CreaturesItem/${Element.id}`}>
+                    <button  onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
                    
                     <div>
                       <li>{Element.name}</li>
