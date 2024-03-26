@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import '../CategorieBar/categorie.css';
+import { NavLink } from 'react-router-dom';
 
 function Categories() {
   const [currentNavIcon, setCurrentNavIcon] = useState(null);
@@ -34,7 +35,9 @@ function Categories() {
             onClick={handleNavigationClick}
             id="creatures"
           >
-            <img src="src/assets/icons/Creatures.png" alt="Creatures" className="nav-icon" />
+           
+              <img src="src/assets/icons/Creatures.png" alt="Creatures" className="nav-icon" />
+         
           </Box>
           <Box
             className={`nav-icon-wrapper ${

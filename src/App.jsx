@@ -9,15 +9,6 @@ import Ocarina from './composants/Ocarina/Ocarina';
 import Partition from './composants/Partition/Partition';
 import Hyrulemap from './composants/HyruleMap/Hyrulemap';
 import AppRouter from './composants/AppRouter.jsx';
-import { createBrowserRouter } from 'react-router-dom';
-
-const router = createBrowserRouter([
-
-  {
-    path: '/map',
-    element: <Hyrulemap/>
-  }
-])
 
 
 function App() {
@@ -29,18 +20,7 @@ function App() {
 
   return (
     <>
-    <header>
-    <AppHeader setManageFavorite={setManageFavorite} manageFavorite={manageFavorite} setManageSort={setManageSort} manageSort={manageSort} searchView={searchView} setSearchView={setSearchView} />
-    <Search/>
-    </header>
-    <main>
-    <FavoritesView setManageFavorite={setManageFavorite} manageFavorite={manageFavorite}/>
-    <SortOverlay setManageSort={setManageSort} manageSort={manageSort} />
-    <Categories />
-    <Ocarina />
-    <Partition />
     <AppRouter />
-    </main>
     </>
   )
 }
