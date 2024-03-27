@@ -20,7 +20,7 @@ const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort
                 alt="Zelda Style Letter"
               />
             </div>
-            <div onClick={() => searchVisible(!setSearchVisible)} className="header-icon-wrapper center in-line">
+            <div onClick={() => setSearchVisible(!searchVisible)} className="header-icon-wrapper center in-line">
               <img
                 id="nav-search"
                 src="src/assets/images/icons/search.png"

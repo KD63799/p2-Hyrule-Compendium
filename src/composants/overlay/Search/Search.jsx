@@ -3,13 +3,13 @@ import './Search.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const SearchView = ({ setSearchVisible }) => {
+const SearchView = ({ searchVisible ,setSearchVisible }) => {
   const handleSearchClose = () => {
     setSearchVisible(false);
   };
 
   return (
-    <div id="search-view" className={`background-texture ${setSearchVisible ? "" : "hidden"}`}>
+    <div id="search-view" className="background-texture">
       <div id="search-container">
         <div className="row center">
           <div className="col-search">
@@ -19,7 +19,7 @@ const SearchView = ({ setSearchVisible }) => {
             </form>
           </div>
           <div className="col-5">
-            <FontAwesomeIcon id="search-close" className="text-grey search-close" icon={faXmark} onClick={handleSearchClose}/>
+            <FontAwesomeIcon id="search-close" className="text-grey search-close" icon={faXmark} onClick={ () => setSearchVisible(!searchVisible) }/>
           </div>
         </div>
       </div>

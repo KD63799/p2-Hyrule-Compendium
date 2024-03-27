@@ -175,3 +175,9 @@
   .background-dark {
     background-color: rgb(26, 20, 20);
   }
+
+
+#app-header
+{
+  cursor : pointer;
+}

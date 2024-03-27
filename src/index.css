@@ -22,3 +22,16 @@ body{
   min-width: 320px;
   min-height: 100vh;
 }
+
+button,
+i.edit-icon,
+i.delete-icon,
+.col-name,
+#app-header,
+#dropdown-sort-choice,
+#nav-search,
+#nav-heart,
+#nav-contact,
+#nav-sort {
+  cursor: pointer;
+}
