@@ -18,7 +18,7 @@
   #navigation-icons {
     padding-top: 1rem;
     height: 5.125rem;
-    position: fixed;
+   /*  position: fixed; */
     width: 100%;
     top: 3.9rem;
   }
