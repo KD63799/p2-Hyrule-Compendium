@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Materials.css'
+
 
 function Materials() {
     // State pour stocker tous les monstres et le filtre appliqué
