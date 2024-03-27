@@ -8,7 +8,7 @@ const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort
       <div className="row space-between">
         <div className="col-fluid">
           <h2 id="app-header" className="text-gold hylia-font">
-            HYRULE COMPENDIUM
+            KOKIRI
           </h2>
         </div>
         <div className="col-fluid">

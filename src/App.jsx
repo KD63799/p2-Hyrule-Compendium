@@ -28,9 +28,6 @@ function App() {
     <FavoritesView setManageFavorite={setManageFavorite} manageFavorite={manageFavorite}/>
     <SortOverlay setManageSort={setManageSort} manageSort={manageSort} />
     <Categories />
-    <Ocarina />
-    <Partition />
-    <Hyrulemap />
     <AppRouter />
     </main>
     </>

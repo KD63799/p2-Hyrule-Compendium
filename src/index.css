@@ -13,6 +13,7 @@
 
  --main-color: #302726
 }
+
 body{
   background-color: var(--main-color);
   margin: 0;
