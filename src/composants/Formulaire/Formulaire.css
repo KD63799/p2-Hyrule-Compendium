@@ -72,16 +72,16 @@ button:focus-visible {
   align-items: center;
   height: 100vh; /* Utilise toute la hauteur de la fenêtre */
   text-align: center;
- margin-left: 40%;
+  margin-left: 40%;
 }
 
 .form-container {
   width: 400px; /* Largeur du formulaire */
-  padding: 20px;
+ 
   border: 1px solid #ccc;
   border-radius: 5px;
   
-}
+} 
 
 form{
   display: flex;
@@ -89,7 +89,7 @@ form{
   gap: 12px;
   text-align: center;
   width: 50%;
-  margin-left: 90px;
+  margin-left: 70px;
 }
 /* AllArmeApi.css */
 /* AllArmeApi.css */
@@ -154,9 +154,9 @@ border-radius: 50px;
 .form-container {
   width: 400px; /* Largeur du formulaire */
   padding: 20px; /* Espacement interne */
-  border: 1px solid #ccc; /* Bordure */
+  border: 1px solid #ffffff; /* Bordure */
   border-radius: 8px; /* Coins arrondis */
-  margin-left: -100px;
+  text-align: center;
   
 }
 

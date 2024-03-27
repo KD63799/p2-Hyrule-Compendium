@@ -1,106 +1,110 @@
-import React, { useState } from "react"; // Import des fonctions useState de React pour gérer l'état local
-import { Formik, Form, Field, ErrorMessage } from "formik"; // Import des composants Formik pour construire le formulaire
-import * as Yup from "yup"; // Import de Yup pour la validation des schémas
-import "./Formulaire.css"; // Import du fichier CSS pour les styles du formulaire
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik"; // Import des composants Formik
+import * as Yup from "yup"; // Import de Yup pour la validation du formulaire
+import "./Formulaire.css"; // Import du fichier CSS pour le style
 
-function Formulaire() {
-  // Utilisation du hook useState pour gérer l'état local de isMusicPlayed
-  const [isMusicPlayed, setIsMusicPlayed] = useState(false);
+function Formulaire({ isFormVisible, setIsFormVisible }) {
+  const [isMusicPlayed, setIsMusicPlayed] = useState(false); // État pour vérifier si la musique a été jouée
 
-  // Définition du schéma de validation avec Yup
+  // Fonction pour inverser la visibilité du formulaire
+  const toggleFormVisibility = () => {
+    setIsFormVisible(!isFormVisible);
+  };
+
+  // Schéma de validation du formulaire avec Yup
   const validationSchema = Yup.object().shape({
-    Nom: Yup.string().required("Veuillez saisir votre nom"), // Champ "Nom" requis
-    Prenom: Yup.string().required("Veuillez saisir votre prénom"), // Champ "Prenom" requis
+    Nom: Yup.string().required("Veuillez saisir votre nom"), // Champ nom requis
+    Prenom: Yup.string().required("Veuillez saisir votre prénom"), // Champ prénom requis
     email: Yup.string()
-      .email("L'adresse mail est incorrecte")
-      .required("Veuillez saisir votre adresse mail"), // Champ "email" requis et doit être une adresse mail valide
+      .email("L'adresse mail est incorrecte") // Doit être une adresse email valide
+      .required("Veuillez saisir votre adresse mail"), // Champ email requis
     password: Yup.string()
-      .required("Veuillez saisir votre mot de passe") // Champ "password" requis
-      .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une lettre majuscule") // Doit contenir au moins une lettre majuscule
+      .required("Veuillez saisir votre mot de passe") // Champ mot de passe requis
+      .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une lettre majuscule") // Doit contenir une lettre majuscule
       .notOneOf([Yup.ref("Nom"), Yup.ref("Prenom")], "Le mot de passe ne peut pas contenir votre nom ou votre prénom") // Ne doit pas contenir le nom ou le prénom
-      .test("minLength", "Le mot de passe doit contenir au moins 8 caractères", (value) => value && value.length >= 8), // Doit contenir au moins 8 caractères
+      .min(8, "Le mot de passe doit contenir au moins 8 caractères"), // Doit contenir au moins 8 caractères
   });
 
-  // Fonction pour jouer la musique
+  // Fonction pour jouer l'audio lors de la soumission réussie du formulaire
   const playAudio = () => {
-    const audio = new Audio("src/assets/video/High Value Item Get (The Legend of Zelda Breath of the Wild OST).mp3");
-    audio.play(); // Lecture de la musique
+    const audio = new Audio("/src/assets/video/High Value Item Get (The Legend of Zelda Breath of the Wild OST).mp3");
+    audio.play();
     audio.onended = () => {
-      setIsMusicPlayed(true); // Une fois la musique terminée, setIsMusicPlayed est mis à true
+      setIsMusicPlayed(true);
     };
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <h1>Formulaire</h1>
-        {/* Utilisation de Formik pour gérer le formulaire */}
-        <Formik
-          initialValues={{ Nom: "", Prenom: "", email: "", password: "" }} // Initialisation des valeurs du formulaire
-          onSubmit={(values, { setSubmitting, resetForm }) => { // Fonction exécutée lors de la soumission du formulaire
-            setTimeout(() => { // Utilisation de setTimeout pour simuler un délai
-              validationSchema.validate(values).then(() => { // Validation des valeurs avec Yup
-               alert("formulaire reussi")// affichage du d'alerte apres la soumission du formulaire
-                if (!isMusicPlayed) { // Si la musique n'a pas déjà été jouée
-                  playAudio(); // Joue la musique
-                }
-                setSubmitting(false); // Définit isSubmitting à false après la soumission
-                resetForm(); // Réinitialise le formulaire
-                setIsMusicPlayed(false); // Réinitialise isMusicPlayed à false
-              }).catch((errors) => { // S'il y a des erreurs de validation
-                console.error("Validation errors:", errors); // Affiche les erreurs de validation dans la console
-                setSubmitting(false); // Définit isSubmitting à false après la soumission
-              });
-            }, 50); // Délai de 50 millisecondes
-          }}
-          validationSchema={validationSchema} // Utilisation du schéma de validation défini avec Yup
-        >
-          {({ isSubmitting, errors, touched }) => ( // Fonction de rendu avec les valeurs de Formik
-            <Form> {/* Utilisation du composant Form de Formik pour le formulaire */}
-              {/* Champ de saisie pour le nom */}
-              <Field
-                className={`input ${errors.Nom && touched.Nom && "error-touched"}`}
-                type="text"
-                name="Nom"
-                placeholder="Saisissez votre nom"
-              />
-              <ErrorMessage name="Nom" component="div" className="error-message" /> {/* Affichage des erreurs de validation pour le nom */}
-              {/* Champ de saisie pour le prénom */}
-              <Field
-                className={`input ${errors.Prenom && touched.Prenom && "error-touched"}`}
-                type="text"
-                name="Prenom"
-                placeholder="Saisissez votre prénom"
-              />
-              <ErrorMessage name="Prenom" component="div" className="error-message" /> {/* Affichage des erreurs de validation pour le prénom */}
-              {/* Champ de saisie pour l'email */}
-              <Field
-                className={`input ${errors.email && touched.email && "error-touched"}`}
-                type="email"
-                name="email"
-                type="email"
-                name="email"
-                placeholder="Saisissez votre adresse mail"
-              />
-              <ErrorMessage name="email" component="div" className="error-message" /> {/* Affichage des erreurs de validation pour l'email */}
-              {/* Champ de saisie pour le mot de passe */}
-              <Field
-                className={`input ${errors.password && touched.password && "error-touched"}`}
-                type="password"
-                name="password"
-                placeholder="Saisissez votre mot de passe"
-              />
-              <ErrorMessage name="password" component="div" className="error-message" /> {/* Affichage des erreurs de validation pour le mot de passe */}
-              <button type="submit" disabled={isSubmitting}>
-                Envoyer
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
+    <>
+      {isFormVisible && ( // Si le formulaire est visible...
+        <div className="container"> {/* Conteneur principal du formulaire */}
+          <div className="form-container"> {/* Conteneur du formulaire */}
+            <h1>Formulaire</h1> {/* Titre du formulaire */}
+            {/* Composant Formik pour gérer le formulaire */}
+            <Formik
+              initialValues={{ Nom: "", Prenom: "", email: "", password: "" }} // Valeurs initiales des champs
+              onSubmit={(values, { setSubmitting, resetForm }) => { // Fonction appelée lors de la soumission du formulaire
+                setTimeout(() => {
+                  validationSchema
+                    .validate(values) // Validation des valeurs du formulaire
+                    .then(() => { // Si la validation réussit
+                      alert("formulaire reussi"); // Affiche une alerte indiquant que le formulaire est réussi
+                      if (!isMusicPlayed) { // Si la musique n'a pas encore été jouée
+                        playAudio(); // Joue l'audio
+                      }
+                      setSubmitting(false); // Définit isSubmitting à false
+                      resetForm(); // Réinitialise les valeurs du formulaire
+                      setIsMusicPlayed(false); // Réinitialise l'état de lecture de la musique
+                    })
+                    .catch((errors) => { // Si la validation échoue
+                      console.error("Validation errors:", errors); // Affiche les erreurs de validation dans la console
+                      setSubmitting(false); // Définit isSubmitting à false
+                    });
+                }, 50); // Délai de 50 millisecondes avant la validation
+              }}
+              validationSchema={validationSchema} // Schéma de validation utilisé par Formik
+            >
+              {({ isSubmitting, errors, touched }) => ( // Rendu conditionnel des composants en fonction de l'état de soumission
+                <Form className="formulaire"> {/* Composant Form pour le formulaire */}
+                  <Field
+                    className={`input ${errors.Nom && touched.Nom && "error-touched"}`} // Ajoute la classe "error-touched" si le champ a été touché et contient des erreurs
+                    type="text"
+                    name="Nom"
+                    placeholder="Saisissez votre nom"
+                  />
+                  <ErrorMessage name="Nom" component="div" className="error-message" /> {/* Affiche les messages d'erreur pour le champ nom */}
+                  <Field
+                    className={`input ${errors.Prenom && touched.Prenom && "error-touched"}`} // Ajoute la classe "error-touched" si le champ a été touché et contient des erreurs
+                    type="text"
+                    name="Prenom"
+                    placeholder="Saisissez votre prénom"
+                  />
+                  <ErrorMessage name="Prenom" component="div" className="error-message" /> {/* Affiche les messages d'erreur pour le champ prénom */}
+                  <Field
+                    className={`input ${errors.email && touched.email && "error-touched"}`} // Ajoute la classe "error-touched" si le champ a été touché et contient des erreurs
+                    type="email"
+                    name="email"
+                    placeholder="Saisissez votre adresse mail"
+                  />
+                  <ErrorMessage name="email" component="div" className="error-message" /> {/* Affiche les messages d'erreur pour le champ email */}
+                  <Field
+                    className={`input ${errors.password && touched.password && "error-touched"}`} // Ajoute la classe "error-touched" si le champ a été touché et contient des erreurs
+                    type="password"
+                    name="password"
+                    placeholder="Saisissez votre mot de passe"
+                  />
+                  <ErrorMessage name="password" component="div" className="error-message" /> {/* Affiche les messages d'erreur pour le champ mot de passe */}
+                  <button type="submit" disabled={isSubmitting}> {/* Bouton de soumission du formulaire */}
+                    Envoyer
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
-export default Formulaire;
-
+export default Formulaire; // Export du composant Formulaire
