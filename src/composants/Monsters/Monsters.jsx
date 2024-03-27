@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import FavoritesView from '../overlay/Favorite/FavoritesContainer';
 
-function Monsters() {
+function Monsters({favorites, setFavorites}) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [AllMunster, setAllMunster] = useState([]);
     const [Filter, setFilter] = useState([]);
@@ -59,7 +60,21 @@ function Monsters() {
         setFilter(filteredDeNumbInverse);
         console.log(Filter);
     }
+
+    const handleAddFavorite = (id) => {
+      const updatedMunster = AllMunster.map(element => {
+          if (element.id === id) {
+              return { ...element, favorite: !element.favorite };
+          }
+          return element;
+      });
+      setAllMunster(updatedMunster);
+      const favoriteelement = AllMunster.find(element => element.id === id);
+      setFavorites([...favorites, favoriteelement]);
+  };
   
+  console.log("testMunster", favorites)
+
     return (
         <div>
             {/* Boutons pour déclencher les différents types de tri */}
@@ -89,12 +104,17 @@ function Monsters() {
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
+                      <button onClick={() => handleAddFavorite(Element.id)}>
+                                    {Element.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                      </button>
+                      
                     </div>
                   </div>
                 </div>
               ))
             )}
             </div>
+            <FavoritesView favorites={favorites} />
         </div>
     );
 }
