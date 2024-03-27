@@ -11,6 +11,8 @@ import Hyrulemap from './composants/HyruleMap/Hyrulemap';
 import AppRouter from './composants/AppRouter.jsx';
 
 
+
+
 function App() {
 
   const [manageFavorite, setManageFavorite] = useState(false);
