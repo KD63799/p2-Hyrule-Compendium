@@ -4,13 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faArrowUp,  faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 
-
-const SortOverlay = ({manageSort, setManageSort}) => {
+const SortOverlay = ({manageSort, setManageSort, sortByCroissant}) => {
   const [sortChoice, setSortChoice] = useState('Name');
   const [sortDirection, setSortDirection] = useState(false);
-
+  console.log("test",sortByCroissant)
   const handleSortChoice = (choice) => {
     setSortChoice(choice);
+     // Appeler la fonction sortByCroissant passée en tant que prop
+     if (choice === 'Number') {
+      sortByCroissant();+
+
+
+
+
+      +++++++++++++++++++++++
+
+    }
   };
 
   const handleSortDirection = () => {
@@ -40,6 +49,7 @@ const SortOverlay = ({manageSort, setManageSort}) => {
             <div className="col-half">
               <div className="sort-dropdown">
                 <button className="sort-btn" onClick={() => handleSortChoice('Number')}>Number</button>
+                  
                 <div className="dropdown-content">
                   <span id="dropdown-sort-choice" className="align-center">{sortChoice}</span>
                 </div>
@@ -73,5 +83,6 @@ const SortOverlay = ({manageSort, setManageSort}) => {
     </div>
   );
 };
+
 
 export default SortOverlay;

@@ -1,6 +1,6 @@
 import Creatures  from "./Creatures/Creatures.jsx";
-import CreaturesItem from "./Creatures__item/CreaturesItem.jsx";
-import Monsters  from "./Monsters/Monsters.jsx";
+import CreaturesDetail from "./CreaturesDetail/CreaturesDetail.jsx";
+import MonstersList from "./Monsters/MonstersList.jsx"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -9,9 +9,9 @@ const AppRouter = () => {
         <div>
             <Router>
                     <Routes>
-                        <Route path="/Monsters" element={<Monsters />} />
+                        <Route path="/Monsters" element={<MonstersList />} />
                         <Route path="/Creatures" element={<Creatures />} />
-                        <Route path="/CreaturesItem/:id" element={<CreaturesItem />} />
+                        <Route path="/Creatures/:id" element={<CreaturesDetail />} />
                         {/* <Route path="/" element={<CreaturesItem name={name} />} /> */}
                         {/* <route path="/*" /> */}
                     </Routes>
