@@ -31,7 +31,7 @@
   }
   
   #app-header:hover {
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
   
   #header-icons {
@@ -61,8 +61,12 @@
     transition: transform 0.5s ease;
   }
 
-  #nav-trend {
+  #nav-contact {
     transition: transform 0.5s ease;
+  }
+
+  #nav-contact:hover {
+    transform: scale(1.5);
   }
 
   #nav-trend:hover {

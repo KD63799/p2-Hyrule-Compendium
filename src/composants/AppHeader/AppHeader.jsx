@@ -2,7 +2,7 @@ import React from "react";
 import "./AppHeader.css";
 import { useState } from "react";
 
-const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort}) => {
+const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort, searchVisible, setSearchVisible}) => {
   return (
     <header className="nav-header background-dark background-texture">
       <div className="row space-between">
@@ -15,12 +15,12 @@ const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort
           <div id="header-icons center">
             <div className="header-icon-wrapper center in-line">
               <img
-                id="nav-trend"
+                id="nav-contact"
                 src="src\assets\images\icons\letter.png"
                 alt="Zelda Style Letter"
               />
             </div>
-            <div className="header-icon-wrapper center in-line">
+            <div onClick={() => searchVisible(!setSearchVisible)} className="header-icon-wrapper center in-line">
               <img
                 id="nav-search"
                 src="src/assets/images/icons/search.png"

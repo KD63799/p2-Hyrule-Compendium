@@ -16,13 +16,14 @@ function App() {
   const [manageFavorite, setManageFavorite] = useState(false);
   const [manageSort, setManageSort] = useState(false)
   const [searchView, setSearchView] = useState(false)
+  const [searchVisible, setSearchVisible] = useState(false)
 
 
   return (
     <>
     <header>
-    <AppHeader setManageFavorite={setManageFavorite} manageFavorite={manageFavorite} setManageSort={setManageSort} manageSort={manageSort} searchView={searchView} setSearchView={setSearchView} />
-    <Search/>
+    <AppHeader setManageFavorite={setManageFavorite} manageFavorite={manageFavorite} setManageSort={setManageSort} manageSort={manageSort} searchView={searchView} setSearchView={setSearchView} searchVisible={searchVisible} setSearchVisible={setSearchVisible}/>
+    <Search setSearchVisible={setSearchVisible}/>
     </header>
     <main>
     <FavoritesView setManageFavorite={setManageFavorite} manageFavorite={manageFavorite}/>
