@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import CreaturesItem from './Creatures__item/CreaturesItem';
+// import CreaturesItem from './Creatures__item/CreaturesItem';
 import { NavLink, Navigate } from 'react-router-dom';
 
 function Treasures() {
