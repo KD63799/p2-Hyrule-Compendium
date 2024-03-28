@@ -11,13 +11,59 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
- --main-color: #302726
+ --main-color: #302726;
 }
 
 body{
   background-color: var(--main-color);
   margin: 0;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+.dp-flex{
   display: flex;
+}
+
+.f-direction{
+  flex-direction: column;
+}
+
+.al-i{
+  align-items: center;
+}
+
+.j-content{
+  justify-content: space-between;
+}
+
+.j-fl-end{
+  justify-content: flex-end;
+}
+
+.txt-align{
+  text-align: center;
+}
+
+
+#col-img{
+  max-height: none; 
+}
+
+/*ANCHOR SIZE*/
+.p-05{
+  padding: 0.5rem;
+}
+
+.p-b-5{
+  padding-bottom: 3rem;
+}
+
+
+body {
+  margin: 0;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;

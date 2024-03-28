@@ -1,6 +1,7 @@
 import React from "react";
 import "./AppHeader.css";
 import { useState } from "react";
+import { NavLink, Navigate } from 'react-router-dom';
 
 const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort, searchVisible, setSearchVisible}) => {
   return (

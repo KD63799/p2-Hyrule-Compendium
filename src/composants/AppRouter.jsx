@@ -1,24 +1,28 @@
-import Creatures  from "./Creatures/Creatures.jsx";
-import CreaturesItem from "./Creatures/Creatures__item/CreaturesItem.jsx";
-import Monsters  from "./Monsters/Monsters.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+// import Creatures from "./Creatures/Creatures.jsx";
+// import CreaturesDetail from "./CreaturesDetail/CreaturesDetail.jsx";
+// import MonstersList from "./Monsters/MonstersList.jsx"
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { useState } from 'react'
+// import SortOverlay from "./overlay/Sort/SortOverlay.jsx";
+
+// const AppRouter = ({ ManageCroissant, ManageCroissantNum }) => {
+
+//     return (
+//         <div>
+//             <Router>
+//                     <Routes>
+//                         <Route path="/Monsters" element={<MonstersList />} />
+//                         <Route path="/Creatures/:id" element={<CreaturesDetail />} />
+//                         <Route path="/Creatures" element={<Creatures manageCroissant={ManageCroissant} manageNum={ManageCroissantNum} />} />
+                        
+//                         {/* <Route path="/" element={<CreaturesItem name={name} />} /> */}
+//                         {/* <route path="/*" /> */}
+//                     </Routes>
+//             </Router>
+//         </div>
+//     );
+// };
 
 
-const AppRouter = () => {
-    return (
-        <div>
-            <Router>
-                    <Routes>
-                        <Route path="/Monsters" element={<Monsters />} />
-                        <Route path="/Creatures" element={<Creatures />} />
-                        <Route path="/CreaturesItem/:id" element={<CreaturesItem />} />
-                        {/* <Route path="/" element={<CreaturesItem name={name} />} /> */}
-                        {/* <route path="/*" /> */}
-                    </Routes>
-            </Router>
-        </div>
-    );
-};
-
-
-export default AppRouter;
+// export default AppRouter;
