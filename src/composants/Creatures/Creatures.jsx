@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NavLink, Navigate } from 'react-router-dom';
 import SortOverlay from '../overlay/Sort/SortOverlay';
 
-function Creatures() {
+function Creatures({ manageCroissant, manageNum  }) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [Allcreatures, setAllcreatures] = useState([]);
     const [Filter, setFilter] = useState([]);
@@ -21,6 +21,20 @@ function Creatures() {
       fetchData();
     }, []);
 
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageCroissant ) {
+        sortByCroissant();
+      }
+    }, [manageCroissant ]);
+
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageNum ) {
+        sortByNum();
+      }
+    }, [manageNum ]);
+
     // Fonction pour récupérer les données des monstres depuis l'API
     async function fetchData() {
       try {
@@ -37,11 +51,13 @@ function Creatures() {
 
     // Fonction pour trier les monstres par ordre croissant de nom
     const sortByCroissant = () => {
+      if (manageCroissant) {
         const filteredCroissant = [...Allcreatures].sort((a,b) => 
         a.name.localeCompare(b.name))
         // Mettre à jour le state avec les monstres triés
         setFilter(filteredCroissant);
         console.log(Filter);
+      }
     }
 
     // Fonction pour trier les monstres par ordre décroissant de nom
@@ -71,7 +87,6 @@ function Creatures() {
         console.log(Filter);
     }
 
-    console.log("testCreatures",sortByCroissant)
     return (
 
       
@@ -87,11 +102,11 @@ function Creatures() {
           
             {Filter.length > 0 ? (
               
-              Filter.map((Element, index) => (
-                <div className='col-img-wrapper j-c' id='card' key={index}>
+              Filter.map((Element) => (
+                <div className='col-img-wrapper j-c' id='card' key={Element.id}>
                   <div className='col-img-wrapper'>
                     {console.log(SortOverlay)}
-                  <SortOverlay manageSort={manageSort} setManageSort={setManageSort} sortByCroissant={"bonjour"} />
+                    
                   <NavLink className='Btn-img' to={`/Creatures/${Element.id}`}>
                     <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
                     <img className='img-radius' src={Element.image} alt={Element.name} />
@@ -107,10 +122,10 @@ function Creatures() {
               ))
             ) : (
               
-              Allcreatures.map((Element, index) => (
+              Allcreatures.map((Element) => (
                 <>
                   
-                <div className='col-img-wrapper j-c' id='card' key={index}>
+                <div className='col-img-wrapper j-c' id='card' key={Element.id}>
                   <div className='col-img-wrapper'>
 
                   <NavLink className='Btn-img' to={`/Creatures/${Element.id}`}>
