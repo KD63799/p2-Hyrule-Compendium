@@ -58,7 +58,7 @@ const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCr
 
 
   return (
-    <div id="sort-view" className="sort-overlay">
+    <div id="sort-view " className={`sort-overlay ${!manageSort ? "" : "sort-visible" }`}>
       <div className={`row end ${manageSort ? "" : "hidden"}`} id="sort-row">
         <div id="sort-container" className="col-sort background-texture">
           <div id="sort-header" className="row space-between">
@@ -68,9 +68,7 @@ const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCr
               </div>
             </div>
             <div className="col-fluid">
-              <button onClick={handleSortClose}>
-              <FontAwesomeIcon id="sort-close" className="text-grey"  icon={faTimes} />
-              </button>
+              <FontAwesomeIcon id="sort-close" className="text-grey"  icon={faTimes} onClick={handleSortClose} />
             </div>
           </div>
           <div className="row">
