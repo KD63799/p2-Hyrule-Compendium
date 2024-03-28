@@ -64,7 +64,7 @@ function Monsters({favorites, setFavorites}) {
     const handleAddFavorite = (id) => {
       const updatedMunster = AllMunster.map(element => {
           if (element.id === id) {
-              return { ...element, favorite: !element.favorite };
+              return { ...element, favorite: !element.favorite } ;
           }
           return element;
       });

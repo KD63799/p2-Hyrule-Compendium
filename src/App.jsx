@@ -25,9 +25,10 @@ function App() {
     function handleFavoriteToggle(id)  {
         // Toggle favorite status for the element with given id
         const updatedFavorites = favorites.map((element) => {
-         return element.id === id ? { ...element, favorite: !element.favorite } : element
+         return element.id === id ? { ...element, favorite: !element.favorite } : element ;
+         
     });
-        console.log(updatedFavorites);
+        console.log("testToggle", updatedFavorites);
         setFavorites(updatedFavorites);}
 
         console.log("testApp", favorites);

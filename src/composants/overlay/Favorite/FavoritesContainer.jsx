@@ -3,8 +3,8 @@ import './Favorites.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const FavoritesContainer = ({ favorites, handleSortClose }) => {
-  console.log("test", favorites);
+const FavoritesContainer = ({ favorites, handleSortClose, setFavorites }) => {
+  console.log("testContainer", favorites);
     return (
         <div id="favorites-container" className="col-favorites background-texture">
             <div id="favorites-header-wrapper">
@@ -31,7 +31,7 @@ const FavoritesView = ({ favorites, manageFavorite, setManageFavorite, setFavori
         setManageFavorite(!manageFavorite);
     };
 
-   
+    console.log("testContainerHi", favorites);
 
     return (
         <div id="favorites-view" className={`favorites-overlay ${manageFavorite ? '' : 'hidden'}`}>
