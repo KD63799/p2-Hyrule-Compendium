@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import SortOverlay from '../overlay/Sort/SortOverlay';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-function Monsters() {
+function Monsters({favorites, setFavorites}) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [AllMunster, setAllMunster] = useState([]);
     const [Filter, setFilter] = useState([]);
@@ -60,6 +61,31 @@ function Monsters() {
         setFilter(filteredDeNumbInverse);
         console.log(Filter);
     }
+    const handleAddFavorite = (id) => {
+      const updatedMunster = AllMunster.map(element => {
+          if (element.id === id) {
+              return { ...element, favorite: true };
+          }
+          return element;
+      });
+      setAllMunster(updatedMunster);
+      const favoriteelement = AllMunster.find(element => element.id === id);
+      setFavorites([...favorites, favoriteelement]);
+  };
+
+  const handleRemoveFavorite = (id) => {
+      // Retire le monstre des favoris
+      const updatedFavorites = favorites.filter(element => element.id !== id);
+      setFavorites(updatedFavorites);
+      // Met à jour l'état du monstre pour qu'il ne soit plus en favori
+      const updatedMunster = AllMunster.map(element => {
+          if (element.id === id) {
+              return { ...element, favorite: false };
+          }
+          return element;
+      });
+      setAllMunster(updatedMunster);
+  };
   
     return (
         <div className='gros-container'>
@@ -84,12 +110,22 @@ function Monsters() {
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
+                      {/* Utilise la fonction handleRemoveFavorite si le monstre est en favori, sinon utilise handleAddFavorite */}
+                     <button onClick={() => Element.favorite ? handleRemoveFavorite(Element.id) : handleAddFavorite(Element.id)}>
+                                            {Element.favorite ? (
+                                            <FontAwesomeIcon icon= {faHeart}className="heart-favorite-red"/>
+                                          ) : (
+                                            <FontAwesomeIcon icon= {faHeart} className="heart-favorite-bl" />
+                                          )}
+                      </button>
+                      
                     </div>
                   </div>
                 </div>
               ))
             )}
             </div>
+            
         </div>
     );
 }

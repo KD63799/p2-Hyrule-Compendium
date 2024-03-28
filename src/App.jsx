@@ -22,6 +22,19 @@ function App() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [ManageCroissant, setManageCroissant] = useState([]);
   const [ManageCroissantNum, setManageCroissantNum] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+
+    const handleFavoriteToggle = (id) =>  {
+        // Toggle favorite status for the element with given id
+        const updatedFavorites = favorites.map((element) => {
+         return element.id === id ? { ...element, favorite: !element.favorite } : element ;
+         
+    });
+        console.log("testToggle", updatedFavorites);
+        setFavorites(updatedFavorites);}
+
+        console.log("testApp", favorites);
 
   return (
     <>
@@ -51,6 +64,8 @@ function App() {
             <FavoritesView
               setManageFavorite={setManageFavorite}
               manageFavorite={manageFavorite}
+              favorites={favorites} 
+              setfavorites={setFavorites}
             />
             <SortOverlay
               setManageSort={setManageSort}
@@ -60,7 +75,6 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<Categories />} />
-              <Route path="/monsters" element={<MonstersList />} />
               <Route path="/treasure" element={<Treasure />} />
               <Route
                 path="/creatures"
@@ -73,8 +87,8 @@ function App() {
               />
               <Route path="/ocarina" element={<Ocarina />} />
               <Route path="/hyrulemap" element={<Hyrulemap />} />
-              <Route path="/Monsters" element={<MonstersList />} />
-              <Route path="/Creatures/:id" element={<CreaturesDetail />} />
+              <Route path="/Monsters" element={<MonstersList favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle}/>} />
+              <Route path="/Creatures/:id" element={<CreaturesDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
             </Routes>
           </main>
         </div>
