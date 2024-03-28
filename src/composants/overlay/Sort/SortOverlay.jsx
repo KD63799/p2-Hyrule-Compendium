@@ -68,9 +68,7 @@ const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCr
               </div>
             </div>
             <div className="col-fluid">
-              <button onClick={handleSortClose}>
-              <FontAwesomeIcon id="sort-close" className="text-grey"  icon={faTimes} />
-              </button>
+              <FontAwesomeIcon id="sort-close" className="text-grey"  icon={faTimes} onClick={handleSortClose} />
             </div>
           </div>
           <div className="row">
