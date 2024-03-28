@@ -41,9 +41,9 @@ function Treasure({ manageCroissant, manageNum  }) {
         const response = await axios.get('https://botw-compendium.herokuapp.com/api/v2/category/treasure');
         const data = response.data;
         // Mettre à jour le state avec les données récupérées
-        setAllcreatures(data.data.food);
-        setCompteur(data.data.food)
-        console.log(Allcreatures);
+        setAlltreasures(data.data);
+        setCompteur(data.data)
+        console.log(Alltreasures);
       } catch (error) {
         console.error(error);
       }
@@ -122,7 +122,7 @@ function Treasure({ manageCroissant, manageNum  }) {
               ))
             ) : (
               
-              Allcreatures.map((Element, index) => (
+              Alltreasures.map((Element, index) => (
                 <>
                   
                 <div className='col-img-wrapper j-c' id='card' key={index}>

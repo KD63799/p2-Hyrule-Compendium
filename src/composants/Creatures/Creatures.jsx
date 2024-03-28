@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import SortOverlay from "../overlay/Sort/SortOverlay";
 
 function Creatures({ manageCroissant, manageNum  }) {
     // State pour stocker tous les monstres et le filtre appliqué
