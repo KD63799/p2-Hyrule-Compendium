@@ -7,11 +7,12 @@ import Search from './composants/overlay/Search/Search';
 import Categories from './composants/CategorieBar/Categories.jsx';
 import Ocarina from './composants/Ocarina/Ocarina';
 import Hyrulemap from './composants/HyruleMap/Hyrulemap';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Monsters from './composants/Monsters/Monsters';
+import MonstersList from './composants/Monsters/MonstersList.jsx'
+import CreaturesDetail from './composants/CreaturesDetail/CreaturesDetail.jsx';
+import Creatures from './composants/Creatures/Creatures.jsx'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Treasure from './composants/Treasure/Treasure';
-import Creatures from './composants/Creatures/Creatures';
-import Acceuil from './composants/Acceuil/Acceuil.jsx';
+
 
 function App() {
   const [manageFavorite, setManageFavorite] = useState(false);
@@ -21,6 +22,7 @@ function App() {
   const [ManageCroissantNum, setManageCroissantNum] = useState([]);
 
   return (
+    <>
     <Router>
       <div>
         
@@ -42,16 +44,17 @@ function App() {
           <SortOverlay setManageSort={setManageSort} manageSort={manageSort} sortByCroissantNum={setManageCroissantNum} setManageCroissant={setManageCroissant} /> 
           <Routes>
             <Route path="/" element={<Categories />} />
-            <Route path="/monsters" element={<Monsters />} />
+            <Route path="/monsters" element={<MonstersList />} />
             <Route path="/treasure" element={<Treasure />} />
-            <Route path="/creatures" element={<Creatures />} />
+            <Route path="/creatures" element={<Creatures manageCroissant={ManageCroissant} manageNum={ManageCroissantNum} />} />
             <Route path="/ocarina" element={<Ocarina />} />
             <Route path="/hyrulemap" element={<Hyrulemap />} />
+            <Route path="/Monsters" element={<MonstersList />} />
+                        <Route path="/Creatures/:id" element={<CreaturesDetail />} />
           </Routes>
         </main>
       </div>
     </Router>
-  );
-}
-
+    </>
+  );}
 export default App;

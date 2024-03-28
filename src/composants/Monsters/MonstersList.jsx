@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import SortOverlay from '../overlay/Sort/SortOverlay';
 
 function Monsters() {
     // State pour stocker tous les monstres et le filtre appliqué
@@ -67,6 +68,7 @@ function Monsters() {
             <button onClick={sortByCroissant}>Trier par ordre croissant</button>
             <button onClick={sortByNum}>Trier par numéro croissant</button>
             <button onClick={sortByNumInverse}>Trier par numéro Décroissant</button>
+            <SortOverlay onClick={() => sortByCroissant()} />
             {/* Affichage des monstres en fonction du filtre appliqué */}
             <div className='d-flex-w j-c'>
             {Filter.length > 0 ? (

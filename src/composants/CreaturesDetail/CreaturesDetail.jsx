@@ -4,7 +4,7 @@ import { useParams, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import './CreaturesItem.css'
+import './CreaturesDetail.css'
 
 function CreaturesItem() {
     const { id } = useParams();

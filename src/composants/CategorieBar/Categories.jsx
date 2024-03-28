@@ -3,7 +3,7 @@ import { useState } from 'react';
 import '../CategorieBar/categorie.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Creatures from '../Creatures/Creatures';
-import Monsters from '../Monsters/Monsters'; 
+import MonstersList from '../Monsters/MonstersList'; 
 // import Materials from '../Materials/Materials';
 // import Equipment from '../Equipment/Equipment';
 import Treasure from '../Treasure/Treasure';
@@ -74,7 +74,7 @@ function Categories() {
             </Box>
         </Box>
         {pageView === 'creatures' && <Creatures />}
-        {pageView === 'monsters' && <Monsters />}
+        {pageView === 'monsters' && <MonstersList />}
         {pageView === 'materials' && <Materials />}
        {pageView === 'equipment' && <Equipment />} 
         {pageView === 'treasure' && <Treasure />}
