@@ -73,3 +73,29 @@ i.delete-icon,
 #nav-sort {
   cursor: pointer;
 }
+
+button  {
+  background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #000000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+.gros-container{
+  margin-top: 25vh;
+}
+
+.ptit-container{
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+}

@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { useState } from "react";
 import "../CategorieBar/categorie.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -33,84 +32,84 @@ function Categories() {
   return (
     <section id="navigation-icons">
       <div>
-      <Box display="flex">
-        <Box
-          className={`nav-icon-wrapper ${
-            currentNavIcon?.id === "creatures" ? "nav-icon-selected" : ""
-          }`}
-        >
-          <a href="/Creatures">
-            <img
-              src="src/assets/icons/Creatures.png"
-              alt="Creatures"
-              className="nav-icon"
-            />
-          </a>
-        </Box>
+        <div className="ptit-container">
+          <div
+            className={`nav-icon-wrapper ${
+              currentNavIcon?.id === "creatures" ? "nav-icon-selected" : ""
+            }`}
+          >
+            <a href="/Creatures">
+              <img
+                src="src/assets/icons/Creatures.png"
+                alt="Creatures"
+                className="nav-icon"
+              />
+            </a>
+          </div>
 
-        <Box
-          className={`nav-icon-wrapper ${
-            currentNavIcon?.id === "monsters" ? "nav-icon-selected" : ""
-          }`}
-        >
-          <a href="/Monsters">
-            <img
-              src="src/assets/icons/Monsters.png"
-              alt="Monsters"
-              className="nav-icon"
-            />
-          </a>
-        </Box>
+          <div
+            className={`nav-icon-wrapper ${
+              currentNavIcon?.id === "monsters" ? "nav-icon-selected" : ""
+            }`}
+          >
+            <a href="/Monsters">
+              <img
+                src="src/assets/icons/Monsters.png"
+                alt="Monsters"
+                className="nav-icon"
+              />
+            </a>
+          </div>
 
-        <Box
-          className={`nav-icon-wrapper ${
-            currentNavIcon?.id === "materials" ? "nav-icon-selected" : ""
-          }`}
-        >
-          <a href="/Materials">
-            <img
-              src="src/assets/icons/Materials.png"
-              alt="Materials"
-              className="nav-icon"
-            />
-          </a>
-        </Box>
+          <div
+            className={`nav-icon-wrapper ${
+              currentNavIcon?.id === "materials" ? "nav-icon-selected" : ""
+            }`}
+          >
+            <a href="/Materials">
+              <img
+                src="src/assets/icons/Materials.png"
+                alt="Materials"
+                className="nav-icon"
+              />
+            </a>
+          </div>
 
-        <Box
-          className={`nav-icon-wrapper ${
-            currentNavIcon?.id === "equipment" ? "nav-icon-selected" : ""
-          }`}
-        >
-          <a href="/Equipment">
-            <img
-              src="src/assets/icons/Equipment.png"
-              alt="Equipment"
-              className="nav-icon"
-            />
-          </a>
-        </Box>
+          <div
+            className={`nav-icon-wrapper ${
+              currentNavIcon?.id === "equipment" ? "nav-icon-selected" : ""
+            }`}
+          >
+            <a href="/Equipment">
+              <img
+                src="src/assets/icons/Equipment.png"
+                alt="Equipment"
+                className="nav-icon"
+              />
+            </a>
+          </div>
 
-        <Box
-          className={`nav-icon-wrapper ${
-            currentNavIcon?.id === "treasure" ? "nav-icon-selected" : ""
-          }`}
-        >
-          <a href="/Treasure">
-            <img
-              src="src/assets/icons/Treasure.png"
-              alt="Treasure"
-              className="nav-icon"
-            />
-          </a>
-        </Box>
-      </Box>
-      {pageView === "creatures" && <Creatures />}
-      {pageView === "monsters" && <MonstersList />}
-      {pageView === "materials" && <Materials />}
-      {pageView === "equipment" && <Equipment />}
-      {pageView === "treasure" && <Treasure />}
+          <div
+            className={`nav-icon-wrapper ${
+              currentNavIcon?.id === "treasure" ? "nav-icon-selected" : ""
+            }`}
+          >
+            <a href="/Treasure">
+              <img
+                src="src/assets/icons/Treasure.png"
+                alt="Treasure"
+                className="nav-icon"
+              />
+            </a>
+          </div>
+        </div>
+        {pageView === "creatures" && <Creatures />}
+        {pageView === "monsters" && <MonstersList />}
+        {pageView === "materials" && <Materials />}
+        {pageView === "equipment" && <Equipment />}
+        {pageView === "treasure" && <Treasure />}
       </div>
-        </section>
+    </section>
   );
 }
 
