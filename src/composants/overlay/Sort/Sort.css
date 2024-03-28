@@ -92,6 +92,11 @@
   display: none;
 }
 
+.hidden-sort {
+  display: none;
+  z-index: 0;
+}
+
 .in-line {
   display: inline;
 }
@@ -597,6 +602,10 @@ input:focus {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.85);
+}
+
+.sort-visible {
+  z-index: 5;
 }
 
 .error-overlay {
