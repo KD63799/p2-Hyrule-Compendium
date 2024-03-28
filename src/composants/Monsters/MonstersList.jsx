@@ -62,14 +62,7 @@ function Monsters() {
     }
   
     return (
-        <div>
-            {/* Boutons pour déclencher les différents types de tri */}
-            <button onClick={sortByDecroissant}>Trier par ordre décroissant</button>
-            <button onClick={sortByCroissant}>Trier par ordre croissant</button>
-            <button onClick={sortByNum}>Trier par numéro croissant</button>
-            <button onClick={sortByNumInverse}>Trier par numéro Décroissant</button>
-            <SortOverlay onClick={() => sortByCroissant()} />
-            {/* Affichage des monstres en fonction du filtre appliqué */}
+        <div className='gros-container'>
             <div className='d-flex-w j-c'>
             {Filter.length > 0 ? (
               Filter.map((Element, index) => (
