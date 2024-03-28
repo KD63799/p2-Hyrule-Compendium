@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import '../CategorieBar/categorie.css';
+import { NavLink, Navigate } from 'react-router-dom';
 
 function Categories() {
   const [currentNavIcon, setCurrentNavIcon] = useState(null);
@@ -27,6 +28,7 @@ function Categories() {
     <section id="navigation-icons">
       <Box display="flex" flexBasis={"100%"} justifyContent={"center"} alignItems={"center"}>
         <Box display="flex">
+          
           <Box
             className={`nav-icon-wrapper ${
               currentNavIcon?.id === 'creatures' ? 'nav-icon-selected' : ''

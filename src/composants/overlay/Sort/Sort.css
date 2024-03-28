@@ -400,6 +400,14 @@ i.delete-icon,
   color: rgb(224, 209, 173);
 }
 
+.display-n{
+  display: none;
+}
+
+.display-b{
+  display: block;
+}
+
 .toggle-wrapper {
   width: 60%;
   margin: auto;
@@ -505,6 +513,15 @@ input:focus {
 
 .remove-line-height {
   line-height: 0;
+}
+
+/* Btn */
+.btn-Right{
+  margin-right: 40px;
+}
+
+.btn-Left{
+  margin-left: 40px;
 }
 
 /* Text Styling */
