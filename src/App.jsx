@@ -22,7 +22,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
 
 
-    function handleFavoriteToggle(id)  {
+    const handleFavoriteToggle = (id) =>  {
         // Toggle favorite status for the element with given id
         const updatedFavorites = favorites.map((element) => {
          return element.id === id ? { ...element, favorite: !element.favorite } : element ;
@@ -40,13 +40,13 @@ function App() {
     <Search/>
     </header>
     <main>
-    <FavoritesView favorites={favorites} setfavorites={setFavorites} setManageFavorite={setManageFavorite} manageFavorite={manageFavorite}/>
+    <FavoritesView favorites={favorites} setfavorites={setFavorites} setManageFavorite={setManageFavorite} manageFavorite={manageFavorite} />
     <SortOverlay setManageSort={setManageSort} manageSort={manageSort} />
     <Categories />
     {/* <Ocarina />
     <Partition />
     <Hyrulemap /> */}
-    <Monsters favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle}/>
+    <Monsters favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />
     <AppRouter />
     </main>
     </>

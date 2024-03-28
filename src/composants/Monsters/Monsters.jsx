@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FavoritesView from '../overlay/Favorite/FavoritesContainer';
 
-function Monsters({favorites, setFavorites}) {
+function Monsters({favorites, setFavorites, handleFavoriteToggle }) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [AllMunster, setAllMunster] = useState([]);
     const [Filter, setFilter] = useState([]);
@@ -64,13 +64,27 @@ function Monsters({favorites, setFavorites}) {
     const handleAddFavorite = (id) => {
       const updatedMunster = AllMunster.map(element => {
           if (element.id === id) {
-              return { ...element, favorite: !element.favorite } ;
+              return { ...element, favorite: true };
           }
           return element;
       });
       setAllMunster(updatedMunster);
       const favoriteelement = AllMunster.find(element => element.id === id);
       setFavorites([...favorites, favoriteelement]);
+  };
+
+  const handleRemoveFavorite = (id) => {
+      // Retire le monstre des favoris
+      const updatedFavorites = favorites.filter(element => element.id !== id);
+      setFavorites(updatedFavorites);
+      // Met à jour l'état du monstre pour qu'il ne soit plus en favori
+      const updatedMunster = AllMunster.map(element => {
+          if (element.id === id) {
+              return { ...element, favorite: false };
+          }
+          return element;
+      });
+      setAllMunster(updatedMunster);
   };
   
   console.log("testMunster", favorites)
@@ -104,8 +118,9 @@ function Monsters({favorites, setFavorites}) {
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
-                      <button onClick={() => handleAddFavorite(Element.id)}>
-                                    {Element.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                     {/* Utilise la fonction handleRemoveFavorite si le monstre est en favori, sinon utilise handleAddFavorite */}
+                     <button onClick={() => Element.favorite ? handleRemoveFavorite(Element.id) : handleAddFavorite(Element.id)}>
+                                            {Element.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
                       </button>
                       
                     </div>
