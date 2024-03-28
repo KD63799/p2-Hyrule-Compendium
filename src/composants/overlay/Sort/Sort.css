@@ -92,6 +92,11 @@
   display: none;
 }
 
+.hidden-sort {
+  display: none;
+  z-index: 0;
+}
+
 .in-line {
   display: inline;
 }
@@ -400,14 +405,6 @@ i.delete-icon,
   color: rgb(224, 209, 173);
 }
 
-.display-n{
-  display: none;
-}
-
-.display-b{
-  display: block;
-}
-
 .toggle-wrapper {
   width: 60%;
   margin: auto;
@@ -515,15 +512,6 @@ input:focus {
   line-height: 0;
 }
 
-/* Btn */
-.btn-Right{
-  margin-right: 40px;
-}
-
-.btn-Left{
-  margin-left: 40px;
-}
-
 /* Text Styling */
 
 .text-gold {
@@ -612,6 +600,10 @@ input:focus {
   left: 0;
   height: 100%;
   width: 100%;
+}
+
+.sort-visible {
+  z-index: 5;
 }
 
 .error-overlay {
