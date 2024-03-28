@@ -26,10 +26,12 @@ const FavoritesContainer = ({ favorites, handleSortClose }) => {
     );
 };
 
-const FavoritesView = ({ favorites, manageFavorite, setManageFavorite }) => {
+const FavoritesView = ({ favorites, manageFavorite, setManageFavorite, setFavorites }) => {
     const handleSortClose = () => {
         setManageFavorite(!manageFavorite);
     };
+
+   
 
     return (
         <div id="favorites-view" className={`favorites-overlay ${manageFavorite ? '' : 'hidden'}`}>
