@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FavoritesView from '../overlay/Favorite/FavoritesContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 function Monsters({favorites, setFavorites, handleFavoriteToggle }) {
     // State pour stocker tous les monstres et le filtre appliqué
@@ -120,7 +123,11 @@ function Monsters({favorites, setFavorites, handleFavoriteToggle }) {
                       <li className='color-stats'>{Element.id}</li>
                      {/* Utilise la fonction handleRemoveFavorite si le monstre est en favori, sinon utilise handleAddFavorite */}
                      <button onClick={() => Element.favorite ? handleRemoveFavorite(Element.id) : handleAddFavorite(Element.id)}>
-                                            {Element.favorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                                            {Element.favorite ? (
+                                            <FontAwesomeIcon icon= {faHeart}className="heart-favorite-red"/>
+                                          ) : (
+                                            <FontAwesomeIcon icon= {faHeart} className="heart-favorite-bl" />
+                                          )}
                       </button>
                       
                     </div>

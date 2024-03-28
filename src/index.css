@@ -86,6 +86,8 @@ button {
   transition: border-color 0.25s;
 }
 
+
+
 button:hover {
   border-color: #646cff;
 }
@@ -108,4 +110,12 @@ button:focus-visible {
   button  {
     background-color: transparent;
   }
+}
+
+.heart-favorite-red {
+  color: rgb(255, 0, 0);
+}
+
+.heart-favorite-bl{
+  color: rgb(0, 0, 0);
 }

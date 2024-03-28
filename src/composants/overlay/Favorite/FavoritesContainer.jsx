@@ -5,6 +5,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const FavoritesContainer = ({ favorites, handleSortClose, handleFavoriteToggle }) => {
+
+    
   console.log("testContainer", favorites);
     return (
         <div id="favorites-container" className="col-favorites background-texture">
@@ -23,9 +25,9 @@ const FavoritesContainer = ({ favorites, handleSortClose, handleFavoriteToggle }
                         <p>{favorite.name}</p>
                         <button onClick={() => handleFavoriteToggle(favorite)}>
                             {favorite ? (
-                            <FontAwesomeIcon icon= {faHeart}className="heart-red"/>
+                            <FontAwesomeIcon icon= {faHeart}className="heart-favorite-red"/>
                             ) : (
-                            <FontAwesomeIcon icon= {faHeart} className="heart-bg" />
+                            <FontAwesomeIcon icon= {faHeart} className="heart-favorite-bl" />
                             )}
                         </button>
                         </ul>
