@@ -13,6 +13,8 @@ import Creatures from "./composants/Creatures/Creatures.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Treasure from "./composants/Treasure/Treasure";
 
+
+
 function App() {
   const [manageFavorite, setManageFavorite] = useState(false);
   const [manageSort, setManageSort] = useState(false);
