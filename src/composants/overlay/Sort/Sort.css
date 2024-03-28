@@ -596,12 +596,10 @@ input:focus {
 
 .sort-overlay,
 .favorites-overlay {
-  position: fixed;
   top: 3.875rem;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .sort-visible {
