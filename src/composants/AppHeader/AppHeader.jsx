@@ -1,26 +1,27 @@
 import React from "react";
 import "./AppHeader.css";
 import { useState } from "react";
+import { NavLink, Navigate } from 'react-router-dom';
 
-const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort}) => {
+const AppHeader = ({manageFavorite, setManageFavorite, manageSort, setManageSort, searchVisible, setSearchVisible}) => {
   return (
     <header className="nav-header background-dark background-texture">
       <div className="row space-between">
         <div className="col-fluid">
           <h2 id="app-header" className="text-gold hylia-font">
-            HYRULE COMPENDIUM
+            KOKIRI
           </h2>
         </div>
         <div className="col-fluid">
           <div id="header-icons center">
             <div className="header-icon-wrapper center in-line">
               <img
-                id="nav-trend"
+                id="nav-contact"
                 src="src\assets\images\icons\letter.png"
                 alt="Zelda Style Letter"
               />
             </div>
-            <div className="header-icon-wrapper center in-line">
+            <div onClick={() => setSearchVisible(!searchVisible)} className="header-icon-wrapper center in-line">
               <img
                 id="nav-search"
                 src="src/assets/images/icons/search.png"
