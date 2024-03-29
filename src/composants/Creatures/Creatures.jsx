@@ -109,7 +109,7 @@ function Creatures({ manageCroissant, manageNum  }) {
                     
                   <NavLink className='Btn-img' to={`/Creatures/${Element.id}`}>
                     <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
-                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                    <img className='creatures-img img-radius' src={Element.image} alt={Element.name} />
                      </button>
                   </NavLink>
                  

@@ -7,8 +7,8 @@
 
 
 iframe {
-    width: 90%;
-    height: 75vh;
+    width: 70%;
+    height: 80vh;
     border-radius: 10px;
 }
 
@@ -28,7 +28,7 @@ section {
 
 
 #map, #panorama {
-    margin-top: 2vh;
+    margin-top: 30vh;
     margin-bottom: 2vh;
     max-height: 85vh;
     min-width: 70vw;

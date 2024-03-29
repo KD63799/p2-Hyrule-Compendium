@@ -18,6 +18,11 @@ import Materials from "./composants/Materials/Materials.jsx";
 import MaterialDetail from "./composants/MaterialsDetail/MaterialDetail.jsx";
 import Equipment from "./composants/Equipment/Equipment.jsx";
 import EquipmentDetail from "./composants/EquipmentDetail/EquipmentDetail.jsx";
+import Formulaire from "./composants/Formulaire/Formulaire.jsx";
+import SearchEntries from "./composants/SearchEntries/SearchEntries.jsx";
+import Acceuil from "./composants/Acceuil/Acceuil.jsx";
+import ComingSoon from "./composants/ComingSoon/ComingSoon.jsx"
+
 
 
 function App() {
@@ -41,6 +46,9 @@ function App() {
 
         console.log("testApp", favorites);
 
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  console.log(searchValue)
   return (
     <>
       <Router>
@@ -48,6 +56,8 @@ function App() {
           <header>
             {searchVisible ? (
               <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
               />
@@ -61,11 +71,16 @@ function App() {
                 setSearchView={setSearchView}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
+                isFormVisible={isFormVisible}
+                setIsFormVisible={setIsFormVisible}
               />
             )}
           </header>
           <main>
+         
+            
             <Categories />
+            <Formulaire isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} />
             <FavoritesView
     setManageFavorite={setManageFavorite}
     manageFavorite={manageFavorite}
@@ -80,6 +95,7 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<Categories />} />
+              <Route path="/" element={<Acceuil />} />
               <Route path="/treasure" element={<Treasure 
               manageCroissant={ManageCroissant} 
               manageNum={ManageCroissantNum} />} />
@@ -103,6 +119,10 @@ function App() {
               <Route path="/Material/:id" element={<MaterialDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
               <Route path="/Monsters/:id" element={<MonstersDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
               <Route path="/Equipment/:id" element={<EquipmentDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+           
+              <Route path="/Search" element={<SearchEntries searchValue={searchValue} />}/>
+          
+              <Route path="/comingsoon" element={<ComingSoon/>}/>
             </Routes>
           </main>
         </div>

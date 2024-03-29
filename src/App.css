@@ -1,9 +1,14 @@
 * {
   box-sizing: border-box;
-}
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Hylia Serif Beta', serif;;
+  }
+  
 
-body {
-  margin: 0;
-  font-family: 'Hylia Serif Beta', serif;;
-}
+  .button-link{
+  size: 1.53rem;
+  }
 

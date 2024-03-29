@@ -1,0 +1,197 @@
+.text-gold {
+    color: rgb(224, 209, 173);
+  }
+  
+  .text-blue {
+    color: rgb(135, 164, 206);
+  }
+  
+  .text-red {
+    color: red;
+  }
+  
+  .text-grey {
+    color: grey;
+  }
+  
+  .text-light-grey {
+    color: lightgray;
+  }
+  
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+    color : text-gold
+  }
+  
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: Hylia Serif;
+    background-color: text-gold;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  button:hover {
+    border-color: text-grey;
+    background-color: text-light-grey;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
+  .form-container {
+    width: 400px; /* Largeur du formulaire */
+    border-radius: 5px;
+   
+  } 
+  
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    width: 50%;
+    margin-left: 40px;
+  }
+  /* AllArmeApi.css */
+  /* AllArmeApi.css */
+  
+  .monster-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Ajoute un espace en bas du conteneur */
+  }
+  
+  .monster-container article {
+    margin-bottom: 20px; /* Ajoute un espace en bas de chaque article */
+    flex-basis: calc(50% - 40px); /* Définit la largeur de chaque article à 50% moins les marges */
+  }
+  
+  .monster-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px; /* Ajoute un espace en bas du titre */
+  }
+  
+  .monster-container img {
+    width: 100%; /* La largeur de l'image prend toute la largeur de l'article */
+    height: auto;
+  }
+  .monster-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Ajoute un espace en bas du conteneur */
+  }
+  
+  /* .monster-container article {
+    margin-bottom: 20px; /* Ajoute un espace en bas de chaque article */
+  
+  
+  .monster-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px; /* Ajoute un espace en bas du titre */
+  }
+  
+  .monster-container img {
+    width: 200px;
+    height: auto;
+  }
+  .input.error-touched {
+    border: 1px solid red; /* Bordure rouge pour les champs "touchés" */
+  }
+  .input{
+  border-radius: 50px;
+  }
+  
+  .container {
+    display: grid;
+    place-content: center;
+  
+    height: 100vh; /* Pour occuper toute la hauteur de la fenêtre */
+  }
+  
+  .form-container {
+    width: 400px; /* Largeur du formulaire */
+    padding: 20px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    text-align: center;
+    z-index: 10;
+    border: 1px solid rgb(224, 209, 173);
+    background-image: url("src/assets/images/texture.jpeg");
+    
+  }
+  
+  .form-close:hover {
+    color: rgb(224, 209, 173);
+  }
+  .end {
+    justify-content: end;
+  }
+  
+  .input {
+    width: 150%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: text-light-grey;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .error-touched {
+    border-color: red;
+  }
+  
+  .isFormVisible{
+    z-index: 5;
+  }
+
+  .text-grey {   margin-left: 300px; } 
+  
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    .form-container{
+      margin: auto;
+      margin-top: 150px;
+      width: 100%;
+  
+     
+    }
+    
+  }
+  @media screen and (min-width: 768px) and (max-width:1024px){
+    .form-container{
+   
+    margin-top: 200px;
+    
+    }
+    input{
+      margin-right: 150px;
+      color: text-light-grey;
+      
+    }
+    button{
+      margin-left: 50px;
+    }
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1440) {
+    .form-container{
+      margin-right: 15px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+  .form-container{
+    margin-top: 300px;
+  }
+  
+  }

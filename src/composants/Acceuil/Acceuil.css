@@ -1,0 +1,27 @@
+#poster {
+    height: auto;
+    display: flex;
+    border-radius: 50px;
+    max-width: 70%;
+    max-height: 70%;
+    /* flex-direction: row-reverse; */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+}
+
+h1 {
+    text-align: center;
+}
+
+#silly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Media Query for screens smaller than 768px (typical mobile devices) */
+@media screen and (max-width: 768px) {
+    #poster {
+        max-width: 90%; /* Adjust the max-width for smaller screens */
+    }
+}

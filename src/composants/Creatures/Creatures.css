@@ -5,13 +5,20 @@
     --fond : #302726;
     --fond-black : #1a1414;
 }
+
 li{
     list-style: none;
 }
+
+* {
+    box-sizing: border-box;
+}
+
 body{
     font-family: 'Hylia Serif Beta', serif;
     color : var(--theme1);
     background-color: var(--fond);
+    margin : 0;
 }
 .color-stats{
     color : var(--theme2);
@@ -31,9 +38,10 @@ body{
     background-color: transparent !important;
 }
 
-img {
+.creatures-img {
     max-height: 11vh;
 }
+
 div #card {
     transition: transform 2s;
     border: 1px solid transparent;
