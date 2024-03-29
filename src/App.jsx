@@ -12,6 +12,12 @@ import CreaturesDetail from "./composants/CreaturesDetail/CreaturesDetail.jsx";
 import Creatures from "./composants/Creatures/Creatures.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Treasure from "./composants/Treasure/Treasure";
+import Formulaire from "./composants/Formulaire/Formulaire.jsx";
+import SearchEntries from "./composants/SearchEntries/SearchEntries.jsx";
+import Acceuil from "./composants/Acceuil/Acceuil.jsx";
+import ComingSoon from "./composants/ComingSoon/ComingSoon.jsx"
+
+
 
 function App() {
   const [manageFavorite, setManageFavorite] = useState(false);
@@ -20,7 +26,9 @@ function App() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [ManageCroissant, setManageCroissant] = useState([]);
   const [ManageCroissantNum, setManageCroissantNum] = useState([]);
-
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  console.log(searchValue)
   return (
     <>
       <Router>
@@ -28,6 +36,8 @@ function App() {
           <header>
             {searchVisible ? (
               <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
               />
@@ -41,11 +51,16 @@ function App() {
                 setSearchView={setSearchView}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
+                isFormVisible={isFormVisible}
+                setIsFormVisible={setIsFormVisible}
               />
             )}
           </header>
           <main>
+         
+            
             <Categories />
+            <Formulaire isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} />
             <FavoritesView
               setManageFavorite={setManageFavorite}
               manageFavorite={manageFavorite}
@@ -57,7 +72,7 @@ function App() {
               setManageCroissant={setManageCroissant}
             />
             <Routes>
-              <Route path="/" element={<Categories />} />
+              <Route path="/" element={<Acceuil/>} />
               <Route path="/monsters" element={<MonstersList />} />
               <Route path="/treasure" element={<Treasure />} />
               <Route
@@ -72,7 +87,9 @@ function App() {
               <Route path="/ocarina" element={<Ocarina />} />
               <Route path="/hyrulemap" element={<Hyrulemap />} />
               <Route path="/Monsters" element={<MonstersList />} />
+              <Route path="/Search" element={<SearchEntries searchValue={searchValue} />}/>
               <Route path="/Creatures/:id" element={<CreaturesDetail />} />
+              <Route path="/comingsoon" element={<ComingSoon/>}/>
             </Routes>
           </main>
         </div>
