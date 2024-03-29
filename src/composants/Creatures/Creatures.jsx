@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { NavLink, Navigate } from 'react-router-dom';
-import SortOverlay from '../overlay/Sort/SortOverlay';
-import './Creatures.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+import SortOverlay from "../overlay/Sort/SortOverlay";
 
 function Creatures({ manageCroissant, manageNum  }) {
     // State pour stocker tous les monstres et le filtre appliqué
@@ -110,7 +109,7 @@ function Creatures({ manageCroissant, manageNum  }) {
                     
                   <NavLink className='Btn-img' to={`/Creatures/${Element.id}`}>
                     <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
-                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                    <img className='creatures-img img-radius' src={Element.image} alt={Element.name} />
                      </button>
                   </NavLink>
                  

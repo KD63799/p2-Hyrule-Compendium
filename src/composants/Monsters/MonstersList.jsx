@@ -1,16 +1,40 @@
 import { useState, useEffect } from 'react';
+import { NavLink, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import SortOverlay from '../overlay/Sort/SortOverlay';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import './Monsters.css'
 
-function Monsters() {
+function Monsters({ manageCroissant, manageNum }) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [AllMunster, setAllMunster] = useState([]);
     const [Filter, setFilter] = useState([]);
+    const [Compteur, setCompteur] = useState(0)
+    const [IdUnique, setIdUnique] = useState([])
+
+    const handleChange = (Element) => {
+      setIdUnique(Element); // Mettre à jour l'élément sélectionné au clic
+      console.log(Element.name);
+  };
   
     useEffect(() => {
       // Appeler la fonction fetchData() lors du premier rendu du composant
       fetchData();
     }, []);
+
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageCroissant ) {
+        sortByCroissant();
+      }
+    }, [manageCroissant ]);
+
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageNum ) {
+        sortByNum();
+      }
+    }, [manageNum ]);
 
     // Fonction pour récupérer les données des monstres depuis l'API
     async function fetchData() {
@@ -68,7 +92,11 @@ function Monsters() {
               Filter.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper img-wrap'>
-                    <img src={Element.image} alt={Element.name} />
+                  <NavLink className='Btn-img' to={`/Monsters/${Element.id}`}>
+                    <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
@@ -80,16 +108,21 @@ function Monsters() {
               AllMunster.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper img-wrap'>
-                    <img  src={Element.image} alt={Element.name} />
+                  <NavLink className='Btn-img' to={`/Monsters/${Element.id}`}>
+                    <button  onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
                     <div>
                       <li>{Element.name}</li>
-                      <li className='color-stats'>{Element.id}</li>
+                      <li className='color-stats'>{Element.id}</li>                   
                     </div>
                   </div>
                 </div>
               ))
             )}
             </div>
+            
         </div>
     );
 }

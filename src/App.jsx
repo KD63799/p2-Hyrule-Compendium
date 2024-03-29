@@ -8,10 +8,20 @@ import Categories from "./composants/CategorieBar/Categories.jsx";
 import Ocarina from "./composants/Ocarina/Ocarina";
 import Hyrulemap from "./composants/HyruleMap/Hyrulemap";
 import MonstersList from "./composants/Monsters/MonstersList.jsx";
+import MonstersDetail from "./composants/MonstersDetail/MonstersDetail.jsx";
 import CreaturesDetail from "./composants/CreaturesDetail/CreaturesDetail.jsx";
 import Creatures from "./composants/Creatures/Creatures.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Treasure from "./composants/Treasure/Treasure";
+import TreasureDetail from "./composants/TreasureDetail/TreasureDetail.jsx"
+import Materials from "./composants/Materials/Materials.jsx";
+import MaterialDetail from "./composants/MaterialsDetail/MaterialDetail.jsx";
+import Equipment from "./composants/Equipment/Equipment.jsx";
+import EquipmentDetail from "./composants/EquipmentDetail/EquipmentDetail.jsx";
+import Formulaire from "./composants/Formulaire/Formulaire.jsx";
+import SearchEntries from "./composants/SearchEntries/SearchEntries.jsx";
+import Acceuil from "./composants/Acceuil/Acceuil.jsx";
+import ComingSoon from "./composants/ComingSoon/ComingSoon.jsx"
 
 
 
@@ -22,7 +32,23 @@ function App() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [ManageCroissant, setManageCroissant] = useState([]);
   const [ManageCroissantNum, setManageCroissantNum] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
+
+    const handleFavoriteToggle = (id) =>  {
+        // Toggle favorite status for the element with given id
+        const updatedFavorites = favorites.map((element) => {
+         return element.id === id ? { ...element, favorite: !element.favorite } : element ;
+         
+    });
+        console.log("testToggle", updatedFavorites);
+        setFavorites(updatedFavorites);}
+
+        console.log("testApp", favorites);
+
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  console.log(searchValue)
   return (
     <>
       <Router>
@@ -30,6 +56,8 @@ function App() {
           <header>
             {searchVisible ? (
               <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
               />
@@ -43,15 +71,22 @@ function App() {
                 setSearchView={setSearchView}
                 searchVisible={searchVisible}
                 setSearchVisible={setSearchVisible}
+                isFormVisible={isFormVisible}
+                setIsFormVisible={setIsFormVisible}
               />
             )}
           </header>
           <main>
+         
+            
             <Categories />
+            <Formulaire isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} />
             <FavoritesView
-              setManageFavorite={setManageFavorite}
-              manageFavorite={manageFavorite}
-            />
+    setManageFavorite={setManageFavorite}
+    manageFavorite={manageFavorite}
+    favorites={favorites} 
+    setFavorites={setFavorites} // Utiliser setFavorites ici
+/>
             <SortOverlay
               setManageSort={setManageSort}
               manageSort={manageSort}
@@ -60,8 +95,10 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<Categories />} />
-              <Route path="/monsters" element={<MonstersList />} />
-              <Route path="/treasure" element={<Treasure />} />
+              <Route path="/" element={<Acceuil />} />
+              <Route path="/treasure" element={<Treasure 
+              manageCroissant={ManageCroissant} 
+              manageNum={ManageCroissantNum} />} />
               <Route
                 path="/creatures"
                 element={
@@ -71,10 +108,21 @@ function App() {
                   />
                 }
               />
+              <Route path="/Materials" element={<Materials manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
+              <Route path="/Equipment" element={<Equipment manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
+              
               <Route path="/ocarina" element={<Ocarina />} />
               <Route path="/hyrulemap" element={<Hyrulemap />} />
-              <Route path="/Monsters" element={<MonstersList />} />
-              <Route path="/Creatures/:id" element={<CreaturesDetail />} />
+              <Route path="/Monsters" element={<MonstersList manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
+              <Route path="/Creatures/:id" element={<CreaturesDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Treasure/:id" element={<TreasureDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Material/:id" element={<MaterialDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Monsters/:id" element={<MonstersDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Equipment/:id" element={<EquipmentDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+           
+              <Route path="/Search" element={<SearchEntries searchValue={searchValue} />}/>
+          
+              <Route path="/comingsoon" element={<ComingSoon/>}/>
             </Routes>
           </main>
         </div>

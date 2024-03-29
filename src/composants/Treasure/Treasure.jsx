@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink, Navigate } from 'react-router-dom';
 import SortOverlay from '../overlay/Sort/SortOverlay';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import './Treasure.css'
 
-function Treasure({ manageCroissant, manageNum  }) {
+function Treasure({ manageCroissant, manageNum }) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [Alltreasures, setAlltreasures] = useState([]);
     const [Filter, setFilter] = useState([]);
@@ -87,10 +90,8 @@ function Treasure({ manageCroissant, manageNum  }) {
         console.log(Filter);
     }
 
+
     return (
-
-      
-
         <div className='gros-container'>
             {/* Boutons pour déclencher les différents types de tri */}
             {console.log(SortOverlay)}
@@ -107,7 +108,7 @@ function Treasure({ manageCroissant, manageNum  }) {
                   <div className='col-img-wrapper'>
                     {console.log(SortOverlay)}
                     
-                  <NavLink className='Btn-img' to={`/Treature/${Element.id}`}>
+                  <NavLink className='Btn-img' to={`/Treasure/${Element.id}`}>
                     <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
                     <img className='img-radius' src={Element.image} alt={Element.name} />
                      </button>
@@ -128,7 +129,7 @@ function Treasure({ manageCroissant, manageNum  }) {
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper'>
 
-                  <NavLink className='Btn-img' to={`/Treature/${Element.id}`}>
+                  <NavLink className='Btn-img' to={`/Treasure/${Element.id}`}>
                     <button  onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
                     <img className='img-radius' src={Element.image} alt={Element.name} />
                      </button>

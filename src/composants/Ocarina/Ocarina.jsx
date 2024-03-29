@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
+import './Ocarina.css'
 
 function Ocarina() {
-    // État local pour stocker le code entré par l'utilisateur
     const [konamiCode, setKonamiCode] = useState('');
-    // État local pour indiquer si la vidéo doit être affichée ou non
     const [showVideo, setShowVideo] = useState(false);
+    const [selectedButtons, setSelectedButtons] = useState([]);
 
-    // Tableau des séquences Konami et leurs vidéos correspondantes
     const konamiSequences = [
         { sequence: 'aceace', videoSrc: 'src/assets/videos/songOfStormsFinal.mp4' },
         { sequence: 'bacbac', videoSrc: 'src/assets/videos/songOfTimeFinalVer.mp4' },
@@ -17,38 +16,30 @@ function Ocarina() {
         { sequence: 'acbbda', videoSrc: 'src/assets/videos/serenadeOfWater.mp4' },
     ];
 
-    // Effet pour initialiser l'audioContext et écouter les touches
     useEffect(() => {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         let oscillator;
         let gainNode;
 
         const startOscillator = (frequency) => {
-            // Création de l'oscillateur et du nœud de gain
             oscillator = audioContext.createOscillator();
             gainNode = audioContext.createGain();
 
-            // Configuration de l'oscillateur
             oscillator.type = 'sine';
             oscillator.frequency.value = frequency;
 
-            // Configuration de la rampe de gain
             gainNode.gain.setValueAtTime(0, audioContext.currentTime);
             gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.1);
             gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
 
-            // Connexion de l'oscillateur et du nœud de gain à la destination audio
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
 
-            // Démarrage et arrêt de l'oscillateur après une courte période
             oscillator.start();
             oscillator.stop(audioContext.currentTime + 0.3);
         };
 
-        // Gestionnaire d'événements pour écouter les touches du clavier
         const handleKeyDown = (event) => {
-            // Tableau de correspondance entre les touches du clavier et les fréquences
             const keyFrequencyMap = {
                 a: 293.66,  // D
                 b: 440.00,  // A
@@ -57,20 +48,16 @@ function Ocarina() {
                 e: 587.33,  // D
             };
 
-            // Si la touche pressée correspond à une fréquence, démarrer l'oscillateur
             const frequency = keyFrequencyMap[event.key];
             if (frequency) {
                 startOscillator(frequency);
             }
 
-            // Ajouter la touche pressée au code Konami en cours
-            setKonamiCode((prevCode) => (prevCode + event.key).slice(-6)); // Conserver uniquement les 6 dernières touches
+            setKonamiCode((prevCode) => (prevCode + event.key).slice(-6));
         };
 
-        // Ajout d'un écouteur d'événements pour écouter les touches du clavier
         document.addEventListener('keydown', handleKeyDown);
 
-        // Nettoyage : fermeture de l'audioContext et suppression de l'écouteur d'événements
         return () => {
             if (oscillator) {
                 oscillator.disconnect();
@@ -83,36 +70,71 @@ function Ocarina() {
         };
     }, []);
 
-    // Effet pour détecter si le code Konami correspond à l'une des séquences définies
     useEffect(() => {
         for (const { sequence, videoSrc } of konamiSequences) {
             if (konamiCode === sequence) {
-                setShowVideo(true); // Afficher la vidéo si le code Konami correspond à une séquence
+                setShowVideo(true);
                 return;
             }
         }
-        setShowVideo(false); // Masquer la vidéo sinon
+        setShowVideo(false);
     }, [konamiCode, konamiSequences]);
 
-    // Rendu du composant
+    const handleButtonActivation = (button) => {
+        if (selectedButtons.includes(button)) {
+            setSelectedButtons((prevSelectedButtons) =>
+                prevSelectedButtons.filter((selectedButton) => selectedButton !== button)
+            );
+        } else {
+            setSelectedButtons((prevSelectedButtons) => [...prevSelectedButtons, button]);
+        }
+    };
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            const pressedButton = event.key.toLowerCase();
+            if (['a', 'b', 'c', 'd', 'e'].includes(pressedButton)) {
+                handleButtonActivation(pressedButton);
+            }
+        };
+
+        document.addEventListener('keypress', handleKeyPress);
+
+        return () => {
+            document.removeEventListener('keypress', handleKeyPress);
+        };
+    }, []);
+    
     return (
-        <div>
+        <div >
+            <div id="partition">
+        <h1>Jouez de l'ocarina</h1> {/* Texte affiché en permanence */}
+        <p>
+            PLAY THE NOTES (A, B, C, D, E)
+            ACE ACE : SONG OF STORMS
+            BAC BAC : SONG OF TIME 
+            CBD CBD : SARIA's SONG
+            BCE BCE : SUN's SONG 
+            DEB DEB : ZELDA's LULLABY 
+            EDB EDB : EPONA's SONG 
+            ACBBDA : SERENADE OF WATER 
+        </p>
+            </div>
             {showVideo && (
-                // Affichage de la vidéo dans une fenêtre contextuelle avec une bordure
-                <div className="video-popup" style={{
-                    border: '5px solid #E0D1AD', // Style de la bordure
-                }}>
+                <div>
                     <video controls autoPlay>
-                        {/* Source vidéo bas*/}
-                        <source src={konamiSequences.find(seq => seq.sequence === konamiCode)?.videoSrc} type="video/mp4" />
+                        {konamiSequences.find(seq => seq.sequence === konamiCode)?.videoSrc && (
+                            <source src={konamiSequences.find(seq => seq.sequence === konamiCode)?.videoSrc} type="video/mp4" />
+                        )}
                         Your browser does not support the video tag.
                     </video>
                 </div>
             )}
-            <p>
-                Appuyez sur les touches correspondantes (A, B, C, D, E) pour jouer différentes notes!
-                Appuyez sur A C E A C E pour jouer la chanson des tempêtes.
-            </p>
+            {selectedButtons.includes('a') && <h1>A</h1>}
+            {selectedButtons.includes('b') && <h1>B</h1>}
+            {selectedButtons.includes('c') && <h1>C</h1>}
+            {selectedButtons.includes('d') && <h1>D</h1>}
+            {selectedButtons.includes('e') && <h1>E</h1>}
         </div>
     );
 }

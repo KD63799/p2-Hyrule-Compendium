@@ -7,6 +7,7 @@ body{
   --main-color: #302726;
   background-color: var(--main-color);
   margin: 0;
+  
 }
 
 a:hover {
@@ -53,12 +54,11 @@ a:hover {
 
 
 body {
-  background-color: var(--main-color);
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
 }
 
 button,
@@ -81,7 +81,6 @@ button  {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -90,12 +89,20 @@ button:hover {
   border-color: #646cff;
 }
 
-.gros-container{
-  margin-top: 25vh;
-}
-
 .ptit-container{
   display: flex;
   flex-flow: row wrap;
   position: relative;
 }
+.heart-favorite-red {
+  color: red;
+}
+
+.heart-favorite-bl {
+  color: #646cff;
+}
+
+.gros-container{
+  margin-top: 30vh;
+}
+

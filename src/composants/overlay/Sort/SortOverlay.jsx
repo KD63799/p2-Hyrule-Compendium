@@ -58,7 +58,7 @@ const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCr
 
 
   return (
-    <div id="sort-view " className={`sort-overlay ${!manageSort ? "" : "sort-visible" }`}>
+    <div id="sort-view " className={`sort-overlay ${!manageSort ? "sort-visible" : "sort-invisible" }`}>
       <div className={`row end ${manageSort ? "" : "hidden"}`} id="sort-row">
         <div id="sort-container" className="col-sort background-texture">
           <div id="sort-header" className="row space-between">

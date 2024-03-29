@@ -12,6 +12,10 @@
   box-shadow: -1px 1px 16px 8px rgba(26, 112, 185, 0.85);
 }
 
+.t-s{
+  top: 35%;
+}
+
 
 #navigation-icons {
   padding-top: 2%;
