@@ -1,17 +1,40 @@
 import { useState, useEffect } from 'react';
+import { NavLink, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import './Monsters.css'
 
-function Monsters({favorites, setFavorites}) {
+function Monsters({ manageCroissant, manageNum }) {
     // State pour stocker tous les monstres et le filtre appliqué
     const [AllMunster, setAllMunster] = useState([]);
     const [Filter, setFilter] = useState([]);
+    const [Compteur, setCompteur] = useState(0)
+    const [IdUnique, setIdUnique] = useState([])
+
+    const handleChange = (Element) => {
+      setIdUnique(Element); // Mettre à jour l'élément sélectionné au clic
+      console.log(Element.name);
+  };
   
     useEffect(() => {
       // Appeler la fonction fetchData() lors du premier rendu du composant
       fetchData();
     }, []);
+
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageCroissant ) {
+        sortByCroissant();
+      }
+    }, [manageCroissant ]);
+
+    useEffect(() => {
+      // Appliquer le tri lorsque la state manageCroissant change
+      if (manageNum ) {
+        sortByNum();
+      }
+    }, [manageNum ]);
 
     // Fonction pour récupérer les données des monstres depuis l'API
     async function fetchData() {
@@ -61,31 +84,6 @@ function Monsters({favorites, setFavorites}) {
         setFilter(filteredDeNumbInverse);
         console.log(Filter);
     }
-    const handleAddFavorite = (id) => {
-      const updatedMunster = AllMunster.map(element => {
-          if (element.id === id) {
-              return { ...element, favorite: true };
-          }
-          return element;
-      });
-      setAllMunster(updatedMunster);
-      const favoriteelement = AllMunster.find(element => element.id === id);
-      setFavorites([...favorites, favoriteelement]);
-  };
-
-  const handleRemoveFavorite = (id) => {
-      // Retire le monstre des favoris
-      const updatedFavorites = favorites.filter(element => element.id !== id);
-      setFavorites(updatedFavorites);
-      // Met à jour l'état du monstre pour qu'il ne soit plus en favori
-      const updatedMunster = AllMunster.map(element => {
-          if (element.id === id) {
-              return { ...element, favorite: false };
-          }
-          return element;
-      });
-      setAllMunster(updatedMunster);
-  };
   
     return (
         <div className='gros-container'>
@@ -94,7 +92,11 @@ function Monsters({favorites, setFavorites}) {
               Filter.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper img-wrap'>
-                    <img src={Element.image} alt={Element.name} />
+                  <NavLink className='Btn-img' to={`/Monsters/${Element.id}`}>
+                    <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
                     <div>
                       <li>{Element.name}</li>
                       <li className='color-stats'>{Element.id}</li>
@@ -106,19 +108,14 @@ function Monsters({favorites, setFavorites}) {
               AllMunster.map((Element, index) => (
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper img-wrap'>
-                    <img  src={Element.image} alt={Element.name} />
+                  <NavLink className='Btn-img' to={`/Monsters/${Element.id}`}>
+                    <button  onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
+                    <img className='img-radius' src={Element.image} alt={Element.name} />
+                     </button>
+                  </NavLink>
                     <div>
                       <li>{Element.name}</li>
-                      <li className='color-stats'>{Element.id}</li>
-                      {/* Utilise la fonction handleRemoveFavorite si le monstre est en favori, sinon utilise handleAddFavorite */}
-                     <button onClick={() => Element.favorite ? handleRemoveFavorite(Element.id) : handleAddFavorite(Element.id)}>
-                                            {Element.favorite ? (
-                                            <FontAwesomeIcon icon= {faHeart}className="heart-favorite-red"/>
-                                          ) : (
-                                            <FontAwesomeIcon icon= {faHeart} className="heart-favorite-bl" />
-                                          )}
-                      </button>
-                      
+                      <li className='color-stats'>{Element.id}</li>                   
                     </div>
                   </div>
                 </div>

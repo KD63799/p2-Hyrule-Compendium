@@ -8,11 +8,16 @@ import Categories from "./composants/CategorieBar/Categories.jsx";
 import Ocarina from "./composants/Ocarina/Ocarina";
 import Hyrulemap from "./composants/HyruleMap/Hyrulemap";
 import MonstersList from "./composants/Monsters/MonstersList.jsx";
+import MonstersDetail from "./composants/MonstersDetail/MonstersDetail.jsx";
 import CreaturesDetail from "./composants/CreaturesDetail/CreaturesDetail.jsx";
 import Creatures from "./composants/Creatures/Creatures.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Treasure from "./composants/Treasure/Treasure";
-
+import TreasureDetail from "./composants/TreasureDetail/TreasureDetail.jsx"
+import Materials from "./composants/Materials/Materials.jsx";
+import MaterialDetail from "./composants/MaterialsDetail/MaterialDetail.jsx";
+import Equipment from "./composants/Equipment/Equipment.jsx";
+import EquipmentDetail from "./composants/EquipmentDetail/EquipmentDetail.jsx";
 
 
 function App() {
@@ -62,11 +67,11 @@ function App() {
           <main>
             <Categories />
             <FavoritesView
-              setManageFavorite={setManageFavorite}
-              manageFavorite={manageFavorite}
-              favorites={favorites} 
-              setfavorites={setFavorites}
-            />
+    setManageFavorite={setManageFavorite}
+    manageFavorite={manageFavorite}
+    favorites={favorites} 
+    setFavorites={setFavorites} // Utiliser setFavorites ici
+/>
             <SortOverlay
               setManageSort={setManageSort}
               manageSort={manageSort}
@@ -75,7 +80,9 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<Categories />} />
-              <Route path="/treasure" element={<Treasure />} />
+              <Route path="/treasure" element={<Treasure 
+              manageCroissant={ManageCroissant} 
+              manageNum={ManageCroissantNum} />} />
               <Route
                 path="/creatures"
                 element={
@@ -85,10 +92,17 @@ function App() {
                   />
                 }
               />
+              <Route path="/Materials" element={<Materials manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
+              <Route path="/Equipment" element={<Equipment manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
+              
               <Route path="/ocarina" element={<Ocarina />} />
               <Route path="/hyrulemap" element={<Hyrulemap />} />
-              <Route path="/Monsters" element={<MonstersList favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle}/>} />
+              <Route path="/Monsters" element={<MonstersList manageCroissant={ManageCroissant} manageNum={ManageCroissantNum}/>} />
               <Route path="/Creatures/:id" element={<CreaturesDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Treasure/:id" element={<TreasureDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Material/:id" element={<MaterialDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Monsters/:id" element={<MonstersDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
+              <Route path="/Equipment/:id" element={<EquipmentDetail favorites={favorites} setFavorites={setFavorites} onFavoriteToggle={handleFavoriteToggle} />} />
             </Routes>
           </main>
         </div>

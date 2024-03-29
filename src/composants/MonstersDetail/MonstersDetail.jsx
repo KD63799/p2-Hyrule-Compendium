@@ -4,11 +4,11 @@ import { useParams, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import './CreaturesDetail.css'
+import './MonstersDetail.css'
 
-function CreaturesItem({favorites, setFavorites}) {
+function MonstersDetail({favorites, setFavorites}) {
     const { id } = useParams();
-    const [creature, setCreature] = useState([]);
+    const [Monster, setMonster] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -16,10 +16,10 @@ function CreaturesItem({favorites, setFavorites}) {
 
     async function fetchData() {
         try {
-            const response = await axios.get(`https://botw-compendium.herokuapp.com/api/v2/category/creatures`);
+            const response = await axios.get(`https://botw-compendium.herokuapp.com/api/v2/category/monsters`);
             const data = response.data;
-            const selectedCreature = data.data.food.find(creature => parseInt(creature.id) === parseInt(id));
-            setCreature(selectedCreature);
+            const selectedMonster = data.data.find(Monster => parseInt(Monster.id) === parseInt(id));
+            setMonster(selectedMonster);
             console.log(id);
         } catch (error) {
             console.error(error);
@@ -27,24 +27,24 @@ function CreaturesItem({favorites, setFavorites}) {
     }
 
     const handleAddFavorite = (id) => {
-        setCreature(prevCreature => ({ ...prevCreature, favorite: true }));
-        const favoriteelement = { ...creature, favorite: true };
+        setMonster(prevCreature => ({ ...prevCreature, favorite: true }));
+        const favoriteelement = { ...Monster, favorite: true };
         setFavorites([...favorites, favoriteelement]);
     };
 
     const handleRemoveFavorite = (id) => {
         const updatedFavorites = favorites.filter(element => element.id !== id);
         setFavorites(updatedFavorites);
-        setCreature(prevCreature => ({ ...prevCreature, favorite: false }));
+        setMonster(prevCreature => ({ ...prevCreature, favorite: false }));
     };
 
     return (
         <div>
-            {creature && (
+            {Monster && (
                 <div>
                     <div className='dp-flex al-i j-content p-05 bg-image b-t m-t'>
-                    <h2>{creature.name}</h2>
-                    <NavLink to="/Creatures">
+                    <h2>{Monster.name}</h2>
+                    <NavLink to="/Monsters">
                     <FontAwesomeIcon className='link' icon={faXmark} />
                     </NavLink>
                     </div>
@@ -52,8 +52,8 @@ function CreaturesItem({favorites, setFavorites}) {
                     <NavLink className={'link'}>
                     <div className='dp-flex j-fl-end p-05'>
                     <li className='color-stats'>{Element.id}</li>
-                    <button onClick={() => creature.favorite ? handleRemoveFavorite(creature.id) : handleAddFavorite(creature.id)}>
-                                {creature.favorite ? (
+                    <button onClick={() => Monster.favorite ? handleRemoveFavorite(Monster.id) : handleAddFavorite(Monster.id)}>
+                                {Monster.favorite ? (
                                     <FontAwesomeIcon icon={faHeart} className="heart-favorite-red" />
                                 ) : (
                                     <FontAwesomeIcon icon={faHeart} className="heart-favorite-bl" />
@@ -63,15 +63,15 @@ function CreaturesItem({favorites, setFavorites}) {
                     </NavLink>
 
                     <div className='dp-flex f-direction al-i txt-align'>
-                    <img id='col-img' src={creature.image} alt={creature.name} />
-                    <p>{creature.description}</p>
+                    <img id='col-img' src={Monster.image} alt={Monster.name} />
+                    <p>{Monster.description}</p>
                     </div>
                     
                     <div className='txt-align bg-image b-b p-b-5'>
                     <h2>Common Locations</h2>
-                    <p>{creature.common_locations}</p>
-                    <h2>Cooking Effect</h2>
-                    <p>{creature.cooking_effect}</p>
+                    <p>{Monster.common_locations}</p>
+                    <h2>Droppable Items</h2>
+                    <p>{Monster.drops}</p>
                     </div>
                     {/* Affichez les autres détails de la créature ici */}
                 </div>
@@ -80,4 +80,4 @@ function CreaturesItem({favorites, setFavorites}) {
     );
 }
 
-export default CreaturesItem;
+export default MonstersDetail;

@@ -345,6 +345,14 @@ i.delete-icon,
 
 /* Sort Entries Styling */
 
+.btn-Right{
+margin-right: 40px;
+}
+
+.btn-Left{
+  margin-left: 40px;
+  }
+
 #sort-row {
   padding: 0rem;
 }
@@ -594,16 +602,15 @@ input:focus {
   overflow: scroll;
 }
 
-.sort-overlay,
-.favorites-overlay {
-  top: 3.875rem;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
 
 .sort-visible {
   z-index: 5;
+}
+
+.sort-invisible {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .error-overlay {

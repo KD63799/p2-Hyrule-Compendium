@@ -4,11 +4,11 @@ import { NavLink, Navigate } from 'react-router-dom';
 import SortOverlay from '../overlay/Sort/SortOverlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import './Treasure.css'
+import './Equipment.css'
 
-function Treasure({ manageCroissant, manageNum }) {
+function Equipment({ manageCroissant, manageNum }) {
     // State pour stocker tous les monstres et le filtre appliqué
-    const [Alltreasures, setAlltreasures] = useState([]);
+    const [AllEquipment, setAllEquipment] = useState([]);
     const [Filter, setFilter] = useState([]);
     const [Compteur, setCompteur] = useState(0)
     const [IdUnique, setIdUnique] = useState([])
@@ -41,12 +41,12 @@ function Treasure({ manageCroissant, manageNum }) {
     // Fonction pour récupérer les données des monstres depuis l'API
     async function fetchData() {
       try {
-        const response = await axios.get('https://botw-compendium.herokuapp.com/api/v2/category/treasure');
+        const response = await axios.get('https://botw-compendium.herokuapp.com/api/v2/category/equipment');
         const data = response.data;
         // Mettre à jour le state avec les données récupérées
-        setAlltreasures(data.data);
+        setAllEquipment(data.data);
         setCompteur(data.data)
-        console.log(Alltreasures);
+        console.log(AllEquipment);
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +55,7 @@ function Treasure({ manageCroissant, manageNum }) {
     // Fonction pour trier les monstres par ordre croissant de nom
     const sortByCroissant = () => {
       if (manageCroissant) {
-        const filteredCroissant = [...Alltreasures].sort((a,b) => 
+        const filteredCroissant = [...AllEquipment].sort((a,b) => 
         a.name.localeCompare(b.name))
         // Mettre à jour le state avec les monstres triés
         setFilter(filteredCroissant);
@@ -65,7 +65,7 @@ function Treasure({ manageCroissant, manageNum }) {
 
     // Fonction pour trier les monstres par ordre décroissant de nom
     const sortByDecroissant = () => {
-        const filteredDeCroissant = [...Alltreasures].sort((a,b) => 
+        const filteredDeCroissant = [...AllEquipment].sort((a,b) => 
         b.name.localeCompare(a.name))
         // Mettre à jour le state avec les monstres triés
         setFilter(filteredDeCroissant);
@@ -74,7 +74,7 @@ function Treasure({ manageCroissant, manageNum }) {
 
     // Fonction pour trier les monstres par ordre croissant de numéro
     const sortByNum = () => {
-        const filteredDeNumb = [...Alltreasures].sort((a,b) => 
+        const filteredDeNumb = [...AllEquipment].sort((a,b) => 
         parseInt(a.id) - parseInt(b.id))
         // Mettre à jour le state avec les monstres triés
         setFilter(filteredDeNumb);
@@ -83,7 +83,7 @@ function Treasure({ manageCroissant, manageNum }) {
 
     // Fonction pour trier les monstres par ordre décroissant de numéro
     const sortByNumInverse = () => {
-        const filteredDeNumbInverse = [...Alltreasures].sort((a,b) => 
+        const filteredDeNumbInverse = [...AllEquipment].sort((a,b) => 
         parseInt(b.id) - parseInt(a.id))
         // Mettre à jour le state avec les monstres triés
         setFilter(filteredDeNumbInverse);
@@ -108,7 +108,7 @@ function Treasure({ manageCroissant, manageNum }) {
                   <div className='col-img-wrapper'>
                     {console.log(SortOverlay)}
                     
-                  <NavLink className='Btn-img' to={`/Treasure/${Element.id}`}>
+                  <NavLink className='Btn-img' to={`/Equipment/${Element.id}`}>
                     <button onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
                     <img className='img-radius' src={Element.image} alt={Element.name} />
                      </button>
@@ -123,13 +123,13 @@ function Treasure({ manageCroissant, manageNum }) {
               ))
             ) : (
               
-              Alltreasures.map((Element, index) => (
+             AllEquipment.map((Element, index) => (
                 <>
                   
                 <div className='col-img-wrapper j-c' id='card' key={index}>
                   <div className='col-img-wrapper'>
 
-                  <NavLink className='Btn-img' to={`/Treasure/${Element.id}`}>
+                  <NavLink className='Btn-img' to={`/Equipment/${Element.id}`}>
                     <button  onClick={() => handleChange(Element)}> {/* Passer l'index au lieu de l'ID */}
                     <img className='img-radius' src={Element.image} alt={Element.name} />
                      </button>
@@ -152,4 +152,4 @@ function Treasure({ manageCroissant, manageNum }) {
         }
       
 
-export default Treasure;
+export default Equipment;
