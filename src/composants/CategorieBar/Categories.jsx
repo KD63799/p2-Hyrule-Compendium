@@ -1,115 +1,54 @@
-import { useState } from "react";
 import "../CategorieBar/categorie.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Creatures from "../Creatures/Creatures";
-import MonstersList from "../Monsters/MonstersList";
-// import Materials from '../Materials/Materials';
-// import Equipment from '../Equipment/Equipment';
-import Treasure from "../Treasure/Treasure";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { CATEGORIES, GAMES } from "../../api/compendium";
 
-function Categories() {
-  const [currentNavIcon, setCurrentNavIcon] = useState(null);
-  const [pageView, setPageView] = useState(null);
+function Categories({ game, setGame }) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleNavigationClick = function (event) {
-    const clickedIcon = event.target.closest(".nav-icon-wrapper");
-    if (!clickedIcon) return;
-
-    setCurrentNavIcon(clickedIcon.querySelector("img"));
-
-    // Au lieu de mettre à jour directement l'état `pageView`, naviguer vers la route appropriée en utilisant React Router
-    const pageViewId = clickedIcon.id;
-    history.push(pageViewId); // Utilisation de history.push pour naviguer
-
-    const navIconWrappers = document.querySelectorAll(".nav-icon-wrapper");
-    navIconWrappers.forEach((wrapper) => {
-      wrapper.classList.remove("nav-icon-selected");
-    });
-
-    clickedIcon.classList.add("nav-icon-selected");
+  // Les numéros diffèrent entre BOTW et TOTK : sur une fiche, on revient à la liste
+  const handleGameChange = (nextGame) => {
+    if (nextGame === game) return;
+    setGame(nextGame);
+    const path = location.pathname.toLowerCase();
+    const category = CATEGORIES.find((item) => path.startsWith(`${item.path.toLowerCase()}/`));
+    if (category) navigate(category.path);
   };
 
   return (
-    <section id="navigation-icons">
-      <div>
-        <div className="ptit-container">
-          <div
-            className={`nav-icon-wrapper ${
-              currentNavIcon?.id === "creatures" ? "nav-icon-selected" : ""
-            }`}
-          >
-            <a href="/Creatures">
-              <img
-                src="src/assets/icons/Creatures.png"
-                alt="Creatures"
-                className="nav-icon"
-              />
-            </a>
-          </div>
+    <nav id="navigation-icons" className="background-dark" aria-label="Categories">
+      <div className="ptit-container">
+        <ul className="nav-icon-list">
+          {CATEGORIES.map((category) => (
+            <li key={category.id}>
+              <NavLink
+                to={category.path}
+                className={({ isActive }) => `nav-icon-wrapper ${isActive ? "nav-icon-selected" : ""}`}
+                title={category.label}
+              >
+                <img src={category.icon} alt={category.label} className="nav-icon" />
+                <span className="nav-icon-label">{category.label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-          <div
-            className={`nav-icon-wrapper ${
-              currentNavIcon?.id === "monsters" ? "nav-icon-selected" : ""
-            }`}
-          >
-            <a href="/Monsters">
-              <img
-                src="src/assets/icons/Monsters.png"
-                alt="Monsters"
-                className="nav-icon"
-              />
-            </a>
-          </div>
-
-          <div
-            className={`nav-icon-wrapper ${
-              currentNavIcon?.id === "materials" ? "nav-icon-selected" : ""
-            }`}
-          >
-            <a href="/Materials">
-              <img
-                src="src/assets/icons/Materials.png"
-                alt="Materials"
-                className="nav-icon"
-              />
-            </a>
-          </div>
-
-          <div
-            className={`nav-icon-wrapper ${
-              currentNavIcon?.id === "equipment" ? "nav-icon-selected" : ""
-            }`}
-          >
-            <a href="/Equipment">
-              <img
-                src="src/assets/icons/Equipment.png"
-                alt="Equipment"
-                className="nav-icon"
-              />
-            </a>
-          </div>
-
-          <div
-            className={`nav-icon-wrapper ${
-              currentNavIcon?.id === "treasure" ? "nav-icon-selected" : ""
-            }`}
-          >
-            <a href="/Treasure">
-              <img
-                src="src/assets/icons/Treasure.png"
-                alt="Treasure"
-                className="nav-icon"
-              />
-            </a>
-          </div>
+        <div className="game-switch" role="group" aria-label="Game">
+          {Object.entries(GAMES).map(([id, { label, title }]) => (
+            <button
+              key={id}
+              type="button"
+              className={`game-btn ${game === id ? "game-btn-active" : ""}`}
+              aria-pressed={game === id}
+              title={title}
+              onClick={() => handleGameChange(id)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
-        {pageView === "creatures" && <Creatures />}
-        {pageView === "monsters" && <MonstersList />}
-        {pageView === "materials" && <Materials />}
-        {pageView === "equipment" && <Equipment />}
-        {pageView === "treasure" && <Treasure />}
       </div>
-    </section>
+    </nav>
   );
 }
 

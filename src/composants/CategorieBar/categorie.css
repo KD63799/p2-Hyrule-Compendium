@@ -1,36 +1,109 @@
-.nav-icon {
-  transition: transform 0.5s ease;
-}
-
-
-.nav-icon:hover {
-  transform: scale(1.2);
-}
-
-.nav-icon-selected {
-  transform: scale(1.2);
-  box-shadow: -1px 1px 16px 8px rgba(26, 112, 185, 0.85);
-}
-
-.t-s{
-  top: 35%;
-}
-
-
 #navigation-icons {
-  padding-top: 2%;
-  height: 5.125rem;
-  top: 13%;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(224, 209, 173, 0.25);
 }
 
-.nav-icon-wrapper>img {
+.ptit-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.nav-icon-list {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
   margin: 0;
-  display: block;
+  padding: 0;
 }
 
 .nav-icon-wrapper {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  margin-top: 0;
-  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem 0.5rem;
+  color: var(--theme1);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-icon-wrapper:hover {
+  color: var(--theme1);
+}
+
+.nav-icon {
+  display: block;
+  width: 2.938rem;
+  height: 2.25rem;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.nav-icon-wrapper:hover .nav-icon,
+.nav-icon-wrapper:focus-visible .nav-icon {
+  transform: scale(1.15);
+}
+
+.nav-icon-label {
+  font-size: 0.75rem;
+}
+
+.nav-icon-selected {
+  background-color: rgba(26, 112, 185, 0.2);
+  box-shadow: 0 0 1rem 0.25rem rgba(26, 112, 185, 0.6);
+}
+
+.nav-icon-selected .nav-icon {
+  transform: scale(1.1);
+}
+
+.game-switch {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--theme1);
+  border-radius: 1.25rem;
+}
+
+.game-btn {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--theme1);
+  border: none;
+  border-radius: 0;
+}
+
+.game-btn:hover {
+  background-color: rgba(224, 209, 173, 0.15);
+}
+
+.game-btn-active,
+.game-btn-active:hover {
+  color: var(--fond-black);
+  background-color: var(--theme1);
+}
+
+@media only screen and (max-width: 600px) {
+  #navigation-icons {
+    padding: 0.35rem 0.5rem;
+  }
+
+  .nav-icon {
+    width: 2.4rem;
+    height: 1.85rem;
+  }
+
+  .nav-icon-wrapper {
+    padding: 0.25rem 0.35rem;
+  }
+
+  .nav-icon-label {
+    font-size: 0.65rem;
+  }
 }

@@ -1,56 +1,52 @@
-import React, { useState } from 'react';
-import './Search.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons'; // J'ai changé l'importation pour correspondre à l'icône utilisée
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from "react";
+import "./Search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const SearchView = ({ searchVisible, setSearchVisible, searchValue, setSearchValue }) => {
+const SearchView = () => {
   const navigate = useNavigate();
-  const handleClose= ()=> {
-    setSearchVisible(!searchVisible)
-    navigate('/')
-  }
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  // Retour à la page consultée avant d'ouvrir la recherche
+  const handleClose = () => {
+    navigate(location.state?.from ?? "/");
+  };
 
   const handleSearchInputChange = (event) => {
-    setSearchValue(event.target.value);
+    const value = event.target.value;
+    setSearchParams(value ? { q: value } : {}, { replace: true, state: location.state });
   };
-
-  const handleSearchClose = () => {
-    setSearchVisible(false);
-  };
-
-  // Filtrer le contenu en fonction de la valeur de recherche
-  const filteredContent = /* Mettez ici le contenu à filtrer */ [];
 
   return (
     <div id="search-view" className="background-texture">
       <div id="search-container">
-        <div className="row center">
-          <div className="col-search">
-            <form id="search-entries-form" action="">
-              <input
-                id="search-entries-input"
-                className="background-texture text-gold"
-                type="text"
-                placeholder="Search"
-                value={searchValue}
-                onChange={handleSearchInputChange}
-              />
-            </form>
-          </div>
-          <div className="col-5">
-            <FontAwesomeIcon
-              id="search-close"
-              className="text-grey search-close"
-              icon={faTimes}
-              onClick={() => handleClose()}
-            />
-          </div>
-        </div>
-      </div>
-      {/* Afficher le contenu filtré */}
-      <div className="filtered-content">
-        {/* Utilisez la variable filteredContent pour afficher le contenu filtré */}
+        <form
+          id="search-entries-form"
+          role="search"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <input
+            ref={inputRef}
+            id="search-entries-input"
+            className="text-gold"
+            type="search"
+            placeholder="Search a name, a number or a category…"
+            aria-label="Search the compendium"
+            value={searchParams.get("q") ?? ""}
+            onChange={handleSearchInputChange}
+            onKeyDown={(event) => event.key === "Escape" && handleClose()}
+          />
+        </form>
+        <button type="button" className="icon-btn" aria-label="Close search" onClick={handleClose}>
+          <FontAwesomeIcon id="search-close" className="text-grey search-close" icon={faTimes} />
+        </button>
       </div>
     </div>
   );

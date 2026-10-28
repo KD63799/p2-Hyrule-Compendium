@@ -1,0 +1,154 @@
+.entry-detail {
+  max-width: 60rem;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(224, 209, 173, 0.35);
+  border-radius: 0.5rem;
+  background-color: var(--fond-black);
+}
+
+.bg-image {
+  background-image: url("../../assets/images/texture.jpeg");
+  background-size: cover;
+}
+
+.b-t {
+  border-bottom: 0.2rem solid var(--theme1);
+}
+
+.b-b {
+  border-top: 0.2rem solid var(--theme1);
+}
+
+.detail-header {
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.detail-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.link {
+  font-size: 1.875rem;
+  color: var(--theme1);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--theme3);
+  transform: scale(1.15);
+}
+
+.detail-meta {
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.favorite-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.favorite-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.favorite-btn:hover svg,
+.favorite-btn[aria-pressed="true"] svg {
+  transform: scale(1.15);
+}
+
+.detail-body {
+  padding: 0 1.5rem 1.5rem;
+}
+
+#col-img {
+  width: min(17.5rem, 70vw);
+  height: auto;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 1rem rgba(224, 209, 173, 0.15));
+}
+
+.detail-body p {
+  max-width: 45rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.detail-attributes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem 2rem;
+  padding: 1.5rem;
+}
+
+.p-b-5.detail-attributes {
+  padding-bottom: 2rem;
+}
+
+.detail-attribute h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: var(--theme1);
+}
+
+.detail-attribute p {
+  margin: 0;
+}
+
+.stat {
+  font-size: 1.35rem;
+  color: var(--theme1);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--theme1);
+  border: 1px solid rgba(224, 209, 173, 0.45);
+  border-radius: 1rem;
+  background-color: rgba(26, 20, 20, 0.75);
+}
+
+.chip img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chip-link {
+  text-decoration: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.chip-link:hover,
+.chip-link:focus-visible {
+  color: var(--theme1);
+  border-color: var(--theme1);
+  background-color: var(--fond);
+}
+
+@media only screen and (max-width: 600px) {
+  .detail-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .detail-attributes {
+    padding: 1.25rem 1rem;
+  }
+}

@@ -1,61 +1,52 @@
 import "./AppHeader.css";
-import { useState } from "react";
-import { NavLink, Navigate } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import letterIcon from "../../assets/images/icons/letter.png";
+import searchIcon from "../../assets/images/icons/search.png";
+import heartIcon from "../../assets/images/icons/receptacle.png";
+import sortIcon from "../../assets/images/icons/Trier.png";
 
-const AppHeader = ({ manageFavorite, setManageFavorite, manageSort, setManageSort, searchVisible, setSearchVisible, isFormVisible, setIsFormVisible }) => {
+const AppHeader = ({ overlay, onToggleOverlay, onCloseOverlay, favoritesCount }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSearch = () => {
-    setSearchVisible(!searchVisible)
-    navigate('/Search')
-  }
+    onCloseOverlay();
+    navigate("/Search", { state: { from: location.pathname } });
+  };
+
+  const icons = [
+    { id: "nav-contact", src: letterIcon, label: "Contact form", onClick: () => onToggleOverlay("form"), active: overlay === "form" },
+    { id: "nav-search", src: searchIcon, label: "Search", onClick: handleSearch },
+    { id: "nav-heart", src: heartIcon, label: "Favorites", onClick: () => onToggleOverlay("favorites"), active: overlay === "favorites", count: favoritesCount },
+    { id: "nav-sort", src: sortIcon, label: "Sort entries", onClick: () => onToggleOverlay("sort"), active: overlay === "sort" },
+  ];
+
   return (
-    <header className="nav-header background-dark background-texture">
-      <div className="row space-between">
-        <div className="col-fluid">
-          <a href= "/">
+    <div className="nav-header background-dark background-texture">
+      <div className="row space-between al-i">
+        <NavLink to="/" className="col-fluid home-link" onClick={onCloseOverlay}>
           <h2 id="app-header" className="text-gold hylia-font">
             KOKIRI
           </h2>
-          </a>
-        </div>
-        <div className="col-fluid"> {/* Conteneur pour les icônes */}
-          <div id="header-icons" className="center"> {/* Conteneur pour les icônes avec une classe CSS pour les centrer */}
-            {/* Icône pour afficher/masquer le formulaire */}
-            <div onClick={() => setIsFormVisible(!isFormVisible)} className="header-icon-wrapper center in-line">
-              <img
-                id="nav-contact"
-                src="src/assets/images/icons/letter.png"
-                alt="Zelda Style Letter"
-              />
-            </div>
-            
-            <div onClick={() => handleSearch()} className="header-icon-wrapper center in-line">
-              <img
-                id="nav-search"
-                src="src/assets/images/icons/search.png"
-                alt="Search"
-                />
-              
-            </div>
-            <div onClick={() => setManageFavorite(!manageFavorite)} className="header-icon-wrapper center in-line">
-              <img
-                id="nav-heart"
-                src="src/assets/images/icons/receptacle.png"
-                alt="Heart"
-              />
-            </div>
-            <div onClick={() => setManageSort(!manageSort)} className="header-icon-wrapper center in-line">
-              <img
-                id="nav-sort"
-                src="src/assets/images/icons/Trier.png"
-                alt="Fairy"
-              />
-            </div>
-          </div>
-        </div>
+        </NavLink>
+        <nav id="header-icons" className="row al-i" aria-label="Tools">
+          {icons.map((icon) => (
+            <button
+              key={icon.id}
+              type="button"
+              className={`header-icon-wrapper ${icon.active ? "header-icon-active" : ""}`}
+              aria-label={icon.label}
+              aria-pressed={icon.active}
+              title={icon.label}
+              onClick={icon.onClick}
+            >
+              <img id={icon.id} src={icon.src} alt="" />
+              {icon.count > 0 && <span className="header-count">{icon.count}</span>}
+            </button>
+          ))}
+        </nav>
       </div>
-    </header>
+    </div>
   );
 };
 

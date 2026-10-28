@@ -1,108 +1,245 @@
+/* ANCHOR THEME */
+:root {
+  --theme1: #e0d1ad; /* or */
+  --theme2: #7494be; /* bleu */
+  --theme3: #11f173; /* vert sheikah */
+  --fond: #302726;
+  --fond-black: #1a1414;
+  --header-height: 3.875rem;
+  color-scheme: dark;
+}
+
+@font-face {
+  font-family: "Hylia Serif";
+  src: url("./assets/fonts/HyliaSerifBeta-Regular.otf") format("opentype");
+  font-display: swap;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body{
-  --main-color: #302726;
-  background-color: var(--main-color);
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
-  
+  font-family: "Hylia Serif", serif;
+  color: var(--theme1);
+  background-color: var(--fond);
+}
+
+img {
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: var(--theme1);
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--theme2);
 }
 
-.dp-flex{
-  display: flex;
-}
-
-.f-direction{
-  flex-direction: column;
-}
-
-.al-i{
-  align-items: center;
-}
-
-.j-content{
-  justify-content: space-between;
-}
-
-.j-fl-end{
-  justify-content: flex-end;
-}
-
-.txt-align{
-  text-align: center;
-}
-
-
-#col-img{
-  max-height: none; 
-}
-
-/*ANCHOR SIZE*/
-.p-05{
-  padding: 0.5rem;
-}
-
-.p-b-5{
-  padding-bottom: 3rem;
-}
-
-
-body {
-  margin: 0;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-
-}
-
-button,
-i.edit-icon,
-i.delete-icon,
-.col-name,
-#app-header,
-#dropdown-sort-choice,
-#nav-search,
-#nav-heart,
-#nav-contact,
-#nav-sort {
-  cursor: pointer;
-}
-
-button  {
-  background-color: transparent;
-  border-radius: 8px;
-  border: 1px solid transparent;
+button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
-button:hover {
-  border-color: #646cff;
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--theme2);
+  outline-offset: 2px;
 }
 
-.ptit-container{
-  display: flex;
-  flex-flow: row wrap;
+.icon-btn {
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.btn-gold {
+  padding: 0.6em 1.4em;
+  color: var(--fond-black);
+  background-color: var(--theme1);
+  border-color: var(--theme1);
+}
+
+.btn-gold:hover {
+  color: var(--theme1);
+  background-color: transparent;
+}
+
+.btn-gold:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* ANCHOR LAYOUT */
+.app-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.45);
+}
+
+main {
   position: relative;
 }
+
+.gros-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* En-tête de page partagé (listes, carte, recherche) */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(224, 209, 173, 0.35);
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.row {
+  display: flex;
+}
+
+.col-half {
+  flex-basis: 50%;
+}
+
+.col-fluid {
+  flex-basis: auto;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.dp-flex {
+  display: flex;
+}
+
+.f-direction {
+  flex-direction: column;
+}
+
+.al-i {
+  align-items: center;
+}
+
+.j-content {
+  justify-content: space-between;
+}
+
+.j-fl-end {
+  justify-content: flex-end;
+}
+
+.txt-align,
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.m-top-3 {
+  margin-top: 3rem;
+}
+
+/*ANCHOR SIZE*/
+.p-05 {
+  padding: 0.5rem;
+}
+
+.p-b-5 {
+  padding-bottom: 3rem;
+}
+
+/* ANCHOR TEXT */
+.hylia-font {
+  font-family: "Hylia Serif", serif;
+}
+
+.font-large {
+  font-size: 2rem;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.text-gold {
+  color: var(--theme1);
+}
+
+.text-grey {
+  color: grey;
+}
+
+.color-stats {
+  color: var(--theme2);
+}
+
 .heart-favorite-red {
-  color: red;
+  color: #e02424;
 }
 
 .heart-favorite-bl {
-  color: #646cff;
+  color: var(--theme2);
 }
 
-.gros-container{
-  margin-top: 30vh;
+/* ANCHOR BACKGROUND */
+.background-texture {
+  background-image: url("./assets/images/texture.jpeg");
+  background-size: cover;
 }
 
+.background-dark {
+  background-color: var(--fond-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

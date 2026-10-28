@@ -1,142 +1,149 @@
-import { useEffect, useState } from 'react';
-import './Ocarina.css'
+import { useCallback, useEffect, useRef, useState } from "react";
+import "./Ocarina.css";
+import songOfStorms from "../../assets/videos/songOfStormsFinal.mp4";
+import songOfTime from "../../assets/videos/songOfTimeFinalVer.mp4";
+import sariasSong from "../../assets/videos/sariasSong.mp4";
+import sunsSong from "../../assets/videos/sunsSong.mp4";
+import zeldasLullaby from "../../assets/videos/zeldasLullaby.mp4";
+import eponasSong from "../../assets/videos/eponasSong.mp4";
+import serenadeOfWater from "../../assets/videos/serenadeOfWater.mp4";
+
+const NOTES = [
+  { key: "a", note: "D", frequency: 293.66 },
+  { key: "b", note: "A", frequency: 440.0 },
+  { key: "c", note: "F", frequency: 349.23 },
+  { key: "d", note: "B", frequency: 493.88 },
+  { key: "e", note: "D", frequency: 587.33 },
+];
+
+const SONGS = [
+  { sequence: "aceace", title: "Song of Storms", videoSrc: songOfStorms },
+  { sequence: "bacbac", title: "Song of Time", videoSrc: songOfTime },
+  { sequence: "cbdcbd", title: "Saria's Song", videoSrc: sariasSong },
+  { sequence: "bcebce", title: "Sun's Song", videoSrc: sunsSong },
+  { sequence: "debdeb", title: "Zelda's Lullaby", videoSrc: zeldasLullaby },
+  { sequence: "edbedb", title: "Epona's Song", videoSrc: eponasSong },
+  { sequence: "acbbda", title: "Serenade of Water", videoSrc: serenadeOfWater },
+];
+
+const SEQUENCE_LENGTH = 6;
+
+// Son de flûte synthétisé avec la Web Audio API
+function playTone(audioContext, frequency) {
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.value = frequency;
+
+  gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+  gainNode.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 0.05);
+  gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.35);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.4);
+}
 
 function Ocarina() {
-    const [konamiCode, setKonamiCode] = useState('');
-    const [showVideo, setShowVideo] = useState(false);
-    const [selectedButtons, setSelectedButtons] = useState([]);
+  const [playedNotes, setPlayedNotes] = useState([]);
+  const [activeNote, setActiveNote] = useState(null);
+  const [song, setSong] = useState(null);
+  const sequenceRef = useRef("");
+  const audioContextRef = useRef(null);
+  const highlightTimeout = useRef(null);
 
-    const konamiSequences = [
-        { sequence: 'aceace', videoSrc: 'src/assets/videos/songOfStormsFinal.mp4' },
-        { sequence: 'bacbac', videoSrc: 'src/assets/videos/songOfTimeFinalVer.mp4' },
-        { sequence: 'cbdcbd', videoSrc: 'src/assets/videos/sariasSong.mp4' },
-        { sequence: 'bcebce', videoSrc: 'src/assets/videos/sunsSong.mp4' },
-        { sequence: 'debdeb', videoSrc: 'src/assets/videos/zeldasLullaby.mp4' },
-        { sequence: 'edbedb', videoSrc: 'src/assets/videos/eponasSong.mp4' },
-        { sequence: 'acbbda', videoSrc: 'src/assets/videos/serenadeOfWater.mp4' },
-    ];
+  const playNote = useCallback((key) => {
+    const note = NOTES.find((item) => item.key === key);
+    if (!note) return;
 
-    useEffect(() => {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let oscillator;
-        let gainNode;
+    // Le navigateur n'autorise l'audio qu'après une interaction : contexte créé au premier son
+    audioContextRef.current ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (audioContextRef.current.state === "suspended") audioContextRef.current.resume();
+    playTone(audioContextRef.current, note.frequency);
 
-        const startOscillator = (frequency) => {
-            oscillator = audioContext.createOscillator();
-            gainNode = audioContext.createGain();
+    setActiveNote(key);
+    clearTimeout(highlightTimeout.current);
+    highlightTimeout.current = setTimeout(() => setActiveNote(null), 200);
 
-            oscillator.type = 'sine';
-            oscillator.frequency.value = frequency;
+    const sequence = (sequenceRef.current + key).slice(-SEQUENCE_LENGTH);
+    const matchedSong = SONGS.find((item) => item.sequence === sequence);
+    sequenceRef.current = matchedSong ? "" : sequence;
+    setPlayedNotes(matchedSong ? [] : sequence.split(""));
+    if (matchedSong) setSong(matchedSong);
+  }, []);
 
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.1);
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.3);
-        };
-
-        const handleKeyDown = (event) => {
-            const keyFrequencyMap = {
-                a: 293.66,  // D
-                b: 440.00,  // A
-                c: 349.23,  // F
-                d: 493.88,  // B
-                e: 587.33,  // D
-            };
-
-            const frequency = keyFrequencyMap[event.key];
-            if (frequency) {
-                startOscillator(frequency);
-            }
-
-            setKonamiCode((prevCode) => (prevCode + event.key).slice(-6));
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            if (oscillator) {
-                oscillator.disconnect();
-            }
-            if (gainNode) {
-                gainNode.disconnect();
-            }
-            audioContext.close();
-            document.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
-
-    useEffect(() => {
-        for (const { sequence, videoSrc } of konamiSequences) {
-            if (konamiCode === sequence) {
-                setShowVideo(true);
-                return;
-            }
-        }
-        setShowVideo(false);
-    }, [konamiCode, konamiSequences]);
-
-    const handleButtonActivation = (button) => {
-        if (selectedButtons.includes(button)) {
-            setSelectedButtons((prevSelectedButtons) =>
-                prevSelectedButtons.filter((selectedButton) => selectedButton !== button)
-            );
-        } else {
-            setSelectedButtons((prevSelectedButtons) => [...prevSelectedButtons, button]);
-        }
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.target.closest("input, textarea")) return;
+      playNote(event.key.toLowerCase());
     };
 
-    useEffect(() => {
-        const handleKeyPress = (event) => {
-            const pressedButton = event.key.toLowerCase();
-            if (['a', 'b', 'c', 'd', 'e'].includes(pressedButton)) {
-                handleButtonActivation(pressedButton);
-            }
-        };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      clearTimeout(highlightTimeout.current);
+      audioContextRef.current?.close();
+      audioContextRef.current = null;
+    };
+  }, [playNote]);
 
-        document.addEventListener('keypress', handleKeyPress);
+  return (
+    <div className="gros-container ocarina">
+      <div id="partition" className="txt-align">
+        <h1>Jouez de l&apos;ocarina</h1>
+        <p className="color-stats">Play the notes with your keyboard (A, B, C, D, E) or tap the buttons.</p>
+      </div>
 
-        return () => {
-            document.removeEventListener('keypress', handleKeyPress);
-        };
-    }, []);
-    
-    return (
-        <div >
-            <div id="partition">
-        <h1>Jouez de l'ocarina</h1> {/* Texte affiché en permanence */}
-        <p>
-            PLAY THE NOTES (A, B, C, D, E)
-            ACE ACE : SONG OF STORMS
-            BAC BAC : SONG OF TIME 
-            CBD CBD : SARIA's SONG
-            BCE BCE : SUN's SONG 
-            DEB DEB : ZELDA's LULLABY 
-            EDB EDB : EPONA's SONG 
-            ACBBDA : SERENADE OF WATER 
-        </p>
-            </div>
-            {showVideo && (
-                <div>
-                    <video controls autoPlay>
-                        {konamiSequences.find(seq => seq.sequence === konamiCode)?.videoSrc && (
-                            <source src={konamiSequences.find(seq => seq.sequence === konamiCode)?.videoSrc} type="video/mp4" />
-                        )}
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            )}
-            {selectedButtons.includes('a') && <h1>A</h1>}
-            {selectedButtons.includes('b') && <h1>B</h1>}
-            {selectedButtons.includes('c') && <h1>C</h1>}
-            {selectedButtons.includes('d') && <h1>D</h1>}
-            {selectedButtons.includes('e') && <h1>E</h1>}
+      <div className="ocarina-buttons">
+        {NOTES.map((note) => (
+          <button
+            key={note.key}
+            type="button"
+            className={`ocarina-note note-${note.key} ${activeNote === note.key ? "ocarina-note-active" : ""}`}
+            aria-label={`Note ${note.key.toUpperCase()} (${note.note})`}
+            onClick={() => playNote(note.key)}
+          >
+            {note.key.toUpperCase()}
+          </button>
+        ))}
+      </div>
+
+      <ol className="ocarina-staff" aria-label="Played notes" aria-live="polite">
+        {Array.from({ length: SEQUENCE_LENGTH }, (_, index) => (
+          <li key={index} className={`staff-slot ${playedNotes[index] ? `note-${playedNotes[index]}` : ""}`}>
+            {playedNotes[index]?.toUpperCase()}
+          </li>
+        ))}
+      </ol>
+
+      {song && (
+        <div className="ocarina-video txt-align">
+          <h2 className="text-gold">{song.title}</h2>
+          <video key={song.sequence} controls autoPlay playsInline>
+            <source src={song.videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
-    );
+      )}
+
+      <ul className="song-list">
+        {SONGS.map((item) => (
+          <li key={item.sequence} className={song === item ? "song-active" : ""}>
+            <span>{item.title}</span>
+            <span className="song-sequence">
+              {item.sequence.split("").map((key, index) => (
+                <span key={index} className={`mini-note note-${key}`}>
+                  {key.toUpperCase()}
+                </span>
+              ))}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default Ocarina;

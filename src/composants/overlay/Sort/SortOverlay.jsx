@@ -1,107 +1,86 @@
-import { useState } from 'react';
-import './Sort.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faArrowUp,  faArrowDown} from '@fortawesome/free-solid-svg-icons';
+import { useState } from "react";
+import "./Sort.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faArrowUp, faArrowDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { SORT_CHOICES } from "../../../api/compendium";
 
+const SortOverlay = ({ onClose, sort, setSort }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCroissant}) => {
-  const [sortChoice, setSortChoice] = useState('Name');
-  const [sortDirection, setSortDirection] = useState(false);
-  const [ToggleDirection, setToggleDirection] = useState(false);
-  const [SwitchButton, setSwitchButton] = useState('Number');
+  const otherChoice = SORT_CHOICES.find((choice) => choice !== sort.choice);
 
   const handleSortChoice = () => {
-    if (sortChoice === 'Name') {
-      setManageCroissant(true); // Déclencher le tri par numéro
-      sortByCroissantNum(false);
-      setSortChoice('Number');
-      setSwitchButton('Name');
-    } else {
-      sortByCroissantNum(true); // Déclencher le tri par nom
-      setManageCroissant(false);
-      setSortChoice('Name');
-      setSwitchButton('Number');
-    }
-  }
-
-    const HandleSortChoiceTwo = () => {
-      if (sortChoice === 'Number') {
-        setManageCroissant(true);
-        sortByCroissantNum(false);
-        
-        setSortChoice('Name');
-        setSwitchButton('Number');
-      } else {
-        
-        sortByCroissantNum(true);
-        setManageCroissant(false);
-        setSortChoice('Number');
-        setSwitchButton('Name');
-      }
-    
-    // Mettre à jour l'état de basculement
-  };
-
-  const handleSortDirection = () => {
-    setSortDirection(!sortDirection);
-  };
-
-  const handleSortClose = () => {
-    setManageSort(!manageSort)
+    setSort({ ...sort, choice: otherChoice });
+    setDropdownOpen(false);
   };
 
   const handleToggleDirection = () => {
-    setToggleDirection(!ToggleDirection)
-    setSortDirection(!sortDirection);
-    handleSortChoice()
-  }
-
+    setSort({ ...sort, descending: !sort.descending });
+  };
 
   return (
-    <div id="sort-view " className={`sort-overlay ${!manageSort ? "sort-visible" : "sort-invisible" }`}>
-      <div className={`row end ${manageSort ? "" : "hidden"}`} id="sort-row">
-        <div id="sort-container" className="col-sort background-texture">
-          <div id="sort-header" className="row space-between">
-            <div className="col-fluid">
-              <div>
-                <h2 id="sort-title" className="hylia-font remove-line-height text-gold">Sort Entries</h2>
+    <div id="sort-view" className="sort-overlay" onClick={onClose}>
+      <div
+        id="sort-container"
+        className="col-sort background-texture"
+        role="dialog"
+        aria-labelledby="sort-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div id="sort-header" className="row space-between al-i">
+          <h2 id="sort-title" className="hylia-font text-gold">
+            Sort Entries
+          </h2>
+          <button type="button" className="icon-btn" aria-label="Close sort" onClick={onClose}>
+            <FontAwesomeIcon id="sort-close" className="text-grey" icon={faTimes} />
+          </button>
+        </div>
+
+        <div className="row sort-controls">
+          <div className="col-half">
+            <p className="sort-label">Sort by</p>
+            <div className={`sort-dropdown ${dropdownOpen ? "open" : ""}`}>
+              <button
+                type="button"
+                className="sort-btn"
+                aria-haspopup="true"
+                aria-expanded={dropdownOpen}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                {sort.choice} <FontAwesomeIcon icon={faCaretDown} />
+              </button>
+              <div className="dropdown-content">
+                <button type="button" id="dropdown-sort-choice" onClick={handleSortChoice}>
+                  {otherChoice}
+                </button>
               </div>
-            </div>
-            <div className="col-fluid">
-              <FontAwesomeIcon id="sort-close" className="text-grey"  icon={faTimes} onClick={handleSortClose} />
             </div>
           </div>
-          <div className="row">
-            <div className="col-half">
-              <div className="sort-dropdown">
-                <button className="sort-btn" onClick={handleSortChoice}>{sortChoice}</button>
-                  
-                <div className="dropdown-content">
-                  <span id="dropdown-sort-choice" onClick={HandleSortChoiceTwo} className="align-center">{SwitchButton}</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-half">
-              <div id="sort-toggle-container">
-                <div className="row center toggle-arrows">
-                  <div className="col-half">
-                   <FontAwesomeIcon  id="ascend-arrow" className={`text-gold ${sortDirection ? 'text-grey' : 'text-gold'}`} icon={faArrowUp} />
-                  </div>
-                  <div className="col-half">
-                    <FontAwesomeIcon  id="descend-arrow" className={`text-gold ${sortDirection ? 'text-gold' : 'text-grey'}`} icon={faArrowDown} />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-full">
-                    <div className="toggle-wrapper">
-                      <div onClick={handleToggleDirection} id="sort-toggle-box" className="toggle-box">
-                        <div id="sort-toggle" className={`toggle ${ToggleDirection ? 'btn-Right' : 'btn-Left'}`} > 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+          <div className="col-half">
+            <p className="sort-label">Order</p>
+            <div id="sort-toggle-container">
+              <FontAwesomeIcon
+                id="ascend-arrow"
+                className={sort.descending ? "text-grey" : "text-gold"}
+                icon={faArrowUp}
+              />
+              <button
+                type="button"
+                role="switch"
+                aria-checked={sort.descending}
+                aria-label="Descending order"
+                id="sort-toggle-box"
+                className="toggle-box"
+                onClick={handleToggleDirection}
+              >
+                <span id="sort-toggle" className={`toggle ${sort.descending ? "btn-Right" : "btn-Left"}`} />
+              </button>
+              <FontAwesomeIcon
+                id="descend-arrow"
+                className={sort.descending ? "text-gold" : "text-grey"}
+                icon={faArrowDown}
+              />
             </div>
           </div>
         </div>
@@ -109,6 +88,5 @@ const SortOverlay = ({manageSort, setManageSort, sortByCroissantNum, setManageCr
     </div>
   );
 };
-
 
 export default SortOverlay;
