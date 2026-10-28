@@ -1,62 +1,55 @@
-import React, { useState } from 'react';
-import './Search.css'
+import { useEffect, useRef } from "react";
+import "./Search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-function SearchComponent() {
-  const [searchView, setSearchView] = useState(false);
-  const [searchStr, setSearchStr] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [windowXCoord, setWindowXCoord] = useState(0);
-  const [windowYCoord, setWindowYCoord] = useState(0);
+const SearchView = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef(null);
 
-  const toggleSearch = () => {
-    if (!searchView) {
-      setWindowXCoord(window.pageXOffset);
-      setWindowYCoord(window.pageYOffset);
-      window.scrollTo(0, 0);
-      setSearchView(true);
-    } else {
-      window.scrollTo(windowXCoord, windowYCoord);
-      setSearchStr('');
-      setSearchView(false);
-      setSearchResults([]);
-    }
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  // Retour à la page consultée avant d'ouvrir la recherche
+  const handleClose = () => {
+    navigate(location.state?.from ?? "/");
   };
 
-  const processSearchInput = (event) => {
-    setSearchStr(event.target.value.toLowerCase());
-    searchEntries();
-  };
-
-  const searchEntries = () => {
-    const results = data.compendiumAlph.filter(entry =>
-      entry.name.toLowerCase().includes(searchStr)
-    );
-    setSearchResults(results);
+  const handleSearchInputChange = (event) => {
+    const value = event.target.value;
+    setSearchParams(value ? { q: value } : {}, { replace: true, state: location.state });
   };
 
   return (
-    <div id="search-view" className={searchView ? '' : 'hidden'}>
+    <div id="search-view" className="background-texture">
       <div id="search-container">
-        <div className="row center">
-          <div className="col-search">
-            <form id="search-entries-form" action="">
-              <input
-                id="search-entries-input"
-                className="background-texture text-gold"
-                type="text"
-                placeholder="Search"
-                value={searchStr}
-                onChange={processSearchInput}
-              />
-            </form>
-          </div>
-          <div className="col-5">
-            <i id="search-close" className="fa-solid fa-xmark text-grey search-close" onClick={toggleSearch}></i>
-          </div>
-        </div>
+        <form
+          id="search-entries-form"
+          role="search"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <input
+            ref={inputRef}
+            id="search-entries-input"
+            className="text-gold"
+            type="search"
+            placeholder="Search a name, a number or a category…"
+            aria-label="Search the compendium"
+            value={searchParams.get("q") ?? ""}
+            onChange={handleSearchInputChange}
+            onKeyDown={(event) => event.key === "Escape" && handleClose()}
+          />
+        </form>
+        <button type="button" className="icon-btn" aria-label="Close search" onClick={handleClose}>
+          <FontAwesomeIcon id="search-close" className="text-grey search-close" icon={faTimes} />
+        </button>
       </div>
     </div>
   );
-}
+};
 
-export default SearchComponent;
+export default SearchView;

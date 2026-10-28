@@ -1,0 +1,102 @@
+.map-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--theme1);
+  border-radius: 10px;
+}
+
+#map,
+#panorama {
+  width: 100%;
+  height: min(75vh, 48rem);
+  min-height: 22rem;
+}
+
+#map {
+  background-color: #0f1d26;
+}
+
+.panorama-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+}
+
+#goBack {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+.pnlm-container {
+  background-image: url("../../assets/images/texture.jpeg") !important;
+}
+
+.leaflet-tooltip {
+  font-family: "Hylia Serif", serif;
+  color: var(--theme1);
+  border-color: var(--theme1);
+  background-color: var(--fond-black);
+}
+
+.leaflet-tooltip-left::before {
+  border-left-color: var(--theme1);
+}
+
+.leaflet-tooltip-right::before {
+  border-right-color: var(--theme1);
+}
+
+.regions {
+  margin-top: 2.5rem;
+}
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  align-items: start;
+  gap: 0.75rem;
+}
+
+.region-card {
+  border: 1px solid rgba(224, 209, 173, 0.3);
+  border-radius: 0.5rem;
+  background-color: var(--fond-black);
+}
+
+.region-card[open] {
+  border-color: var(--theme1);
+}
+
+.region-card summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.region-list {
+  padding: 0 1rem 0.75rem;
+}
+
+.region-list h3 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.region-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+
+.region-list li {
+  padding: 0.15rem 0.6rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(224, 209, 173, 0.3);
+  border-radius: 1rem;
+}

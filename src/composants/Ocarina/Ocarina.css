@@ -1,0 +1,127 @@
+.ocarina h1 {
+  margin: 0 0 0.5rem;
+}
+
+.ocarina-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.ocarina-note {
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  color: var(--fond-black);
+  border-radius: 50%;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.ocarina-note:hover {
+  filter: brightness(1.15);
+}
+
+.ocarina-note:active,
+.ocarina-note-active {
+  transform: scale(0.9);
+  filter: brightness(1.3);
+}
+
+/* Bouton A bleu, boutons C jaunes comme sur la manette N64 */
+.note-a {
+  background-color: #4a7fd6;
+  color: #fff;
+}
+
+.note-b,
+.note-c,
+.note-d,
+.note-e {
+  background-color: #f2c94c;
+}
+
+.ocarina-staff {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  max-width: 28rem;
+  border-top: 1px solid rgba(224, 209, 173, 0.4);
+  border-bottom: 1px solid rgba(224, 209, 173, 0.4);
+}
+
+.staff-slot {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--fond-black);
+  border: 1px dashed rgba(224, 209, 173, 0.4);
+  border-radius: 50%;
+}
+
+.staff-slot[class*="note-"] {
+  border-style: solid;
+}
+
+.staff-slot.note-a {
+  color: #fff;
+}
+
+.ocarina-video {
+  margin-bottom: 2rem;
+}
+
+.ocarina-video video {
+  width: min(100%, 48rem);
+  max-height: 60vh;
+  border: 1px solid var(--theme1);
+  border-radius: 0.5rem;
+  background-color: #000;
+}
+
+.song-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.75rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.song-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  background-color: var(--fond-black);
+}
+
+.song-list li.song-active {
+  border-color: var(--theme1);
+}
+
+.song-sequence {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.mini-note {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 0.8rem;
+  color: var(--fond-black);
+  border-radius: 50%;
+}
+
+.mini-note.note-a {
+  color: #fff;
+}

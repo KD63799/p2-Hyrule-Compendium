@@ -1,0 +1,83 @@
+/* Chargement */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+}
+
+.lds-ring div {
+  display: block;
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  margin: 0.5rem;
+  border: 8px solid var(--theme3);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--theme3) transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Aucun résultat */
+.no-entry-placeholder {
+  padding: 2rem 1rem;
+}
+
+#makar {
+  width: min(18.75rem, 80vw);
+  height: auto;
+}
+
+/* Erreur réseau */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.error-modal {
+  max-width: 32rem;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--theme1);
+}
+
+.error-image-wrapper > img {
+  max-width: 10rem;
+}
+
+@media only screen and (min-width: 700px) {
+  .error-modal {
+    font-size: 1.25rem;
+  }
+
+  .error-image-wrapper > img {
+    max-width: 16rem;
+  }
+}
